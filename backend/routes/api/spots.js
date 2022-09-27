@@ -34,7 +34,9 @@ router.get("/", async (req, res) => {
 
         //console.log(average)
         if (average) {
-            spot.avgRating = average.avgRating
+            const fixedAvg = Number(average.avgRating).toFixed(1)
+            const parseAvg = parseFloat(fixedAvg)
+            spot.avgRating = parseAvg
         } else {
             spot.avgRating = "no ratings yet"
         }
