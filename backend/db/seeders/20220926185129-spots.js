@@ -21,7 +21,7 @@ module.exports = {
         lat: 40.73300994697912,
         lng: -73.95382807237672,
         name: "Condo in Greenpoint",
-        description: "Designed with the character and history of Greenpoint in mind, 186 Huron offers boutique-scale living in the heart of this authentically charming community.",
+        description: "Designed with the character and history of Greenpoint in mind",
         price: 2100
       },
       {
@@ -33,7 +33,7 @@ module.exports = {
         lat: 40.74806542421029,
         lng: -73.94441112819383,
         name: "Condo in Hunters Point",
-        description: "A breathtaking Penthouse perched above the East River and overlooking the Manhattan skyline, this brand new 2-bedroom, 2-bathroom condo redefines by elevating Long Island City luxury.",
+        description: "A breathtaking Penthouse perched above the East River and overlooking the Manhattan skyline",
         price: 2975
       },
       {
@@ -45,7 +45,7 @@ module.exports = {
         lat: 40.702567484846035,
         lng: -73.991376901214,
         name: "Condo in DUMBO",
-        description: "Olympia is a modern interpretation of its surroundings. Rising tall from the heart of historic Dumbo, Olympia offers expansive views of the sun-drenched harbor and Lower Manhattan skyline from the highest crest in the neighborhood.",
+        description: "Rising tall from the heart of historic Dumbo, Olympia offers expansive views of the sun-drenched harbor and Lower Manhattan skyline",
         price: 3000
       },
       {
@@ -57,7 +57,7 @@ module.exports = {
         lat: 40.76505185047517,
         lng: -73.9792624435398,
         name: "Condo in Midtown",
-        description: "Located high above New York City on the 59th floor, this unit offers specular views of New York City and Central Park while located on Billionaire's Row. The unit offers Central Park views from the living room, primary bedroom and second bedroom. Welcome home!",
+        description: "Located high above New York City on the 59th floor, this unit offers specular views of New York City and Central Park while located on Billionaire's Row",
         price: 2550
       },
       {
@@ -69,7 +69,7 @@ module.exports = {
         lat: 40.753752953512674,
         lng: -74.00333700121327,
         name: "Condo in Hudson Yards",
-        description: "Fifteen Hudson Yards occupies a prime position on the Public Square and Gardens at the center of Hudson Yards, directly on the High Line and adjacent to The Shed, the forthcoming center for artistic invention.",
+        description: "Fifteen Hudson Yards occupies a prime position on the Public Square and Gardens at the center of Hudson Yards",
         price: 2995
       },
     ], {});

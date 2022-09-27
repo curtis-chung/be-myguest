@@ -60,7 +60,7 @@ module.exports = {
       {
         spotId: 5,
         url: "spot5 url2",
-        preview: false
+        preview: true
       },
     ])
   },
