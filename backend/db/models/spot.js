@@ -32,7 +32,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     address: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Must enter an address"
+        }
+      }
     },
     city: {
       type: DataTypes.STRING,
