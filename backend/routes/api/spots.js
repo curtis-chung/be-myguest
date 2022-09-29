@@ -253,8 +253,8 @@ router.get("/:spotId", async (req, res) => {
 // edit a spot
 router.put("/:spotId", requireAuth, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
-    const spotId = req.params.spotId
-    const ownerId = req.user.id
+    const spotId = req.params.spotId;
+    const ownerId = req.user.id;
 
     // query for spot
     const currentSpot = await Spot.findByPk(spotId)
@@ -287,7 +287,8 @@ router.put("/:spotId", requireAuth, async (req, res) => {
         lng,
         name,
         description,
-        price
+        price,
+        updatedAt: new Date()
     })
 
     return res.json(edit)
