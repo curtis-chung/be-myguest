@@ -81,7 +81,6 @@ router.get("/current", async (req, res) => {
     }
 
     for (let review of reviewList) {
-        console.log(review.Spot.id)
         const previewImage = await SpotImage.findOne({
             where: {
                 [Op.and]: [
