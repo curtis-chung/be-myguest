@@ -48,7 +48,7 @@ router.post(
                 user,
             });
         } catch (error) {
-            error.status = 403
+            //error.status = 403
             return next(error)
         }
     }

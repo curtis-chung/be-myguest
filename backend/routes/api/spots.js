@@ -2,6 +2,7 @@ const express = require('express')
 const { requireAuth } = require("../../utils/auth");
 const { Booking, Review, ReviewImage, Spot, SpotImage, User, Sequelize } = require('../../db/models')
 const router = express.Router();
+const { Op } = require('sequelize')
 
 // Get all spots
 router.get("/", async (req, res) => {
@@ -290,6 +291,220 @@ router.put("/:spotId", requireAuth, async (req, res) => {
     })
 
     return res.json(edit)
+})
+
+// Create a Review for a Spot based on the Spot's id
+router.post("/:spotId/reviews", requireAuth, async (req, res) => {
+    const { review, stars } = req.body;
+    const { spotId } = req.params;
+    const userId = req.user.id;
+
+    // query for spot
+    const spot = await Spot.findByPk(spotId)
+
+    // if spot not found
+    if (!spot) {
+        res.status(404);
+        return res.json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    }
+
+    // Review from the current user already exists for the Spot
+    // findAll will return an array, findOne will return an object
+    const reviewChecker = await Review.findOne({
+        where: {
+            [Op.and]: [
+                { spotId: spotId },
+                { userId: userId }
+            ]
+        }
+    })
+
+    if (reviewChecker) {
+        res.status(403);
+        return res.json({
+            message: "User already has a review for this spot",
+            statusCode: 403
+        })
+    }
+
+    // if spot is found
+    const newReview = await Review.create({
+        userId,
+        spotId,
+        review,
+        stars,
+    })
+
+    return res.json(newReview)
+})
+
+// Get all Reviews by a Spot's id
+router.get("/:spotId/reviews", async (req, res) => {
+    const userId = req.user.id;
+    const { spotId } = req.params;
+
+    const reviews = await Review.findAll({
+        include: [
+            {
+                model: User,
+                attributes: ["id", "firstName", "lastName"]
+            },
+            {
+                model: ReviewImage,
+                attributes: ["id", "url"]
+            }
+        ],
+        where: {
+            [Op.and]: [
+                { spotId: spotId },
+                { userId: userId }
+            ]
+        }
+    })
+
+    if (reviews.length === 0) {
+        res.status(404);
+        return res.json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    }
+
+    let reviewList = []
+
+    for (let review of reviews) {
+        reviewList.push(review.toJSON())
+    }
+
+    res.json({ Reviews: reviewList })
+})
+
+// Create a Booking from a Spot based on the Spot's id
+
+router.post("/:spotId/bookings", requireAuth, async (req, res) => {
+    const { startDate, endDate } = req.body;
+    const { spotId } = req.params;
+    const userId = req.user.id;
+
+    // query for spot
+    const spot = await Spot.findByPk(spotId)
+
+    // if spot not found
+    if (!spot) {
+        res.status(404);
+        return res.json({
+            message: "Review couldn't be found",
+            statusCode: 404
+        })
+    }
+
+    // Review must not belong to the current user
+    if (spot.ownerId === userId) {
+        res.status(403);
+        return res.json({
+            message: "Forbidden",
+            statusCode: 403
+        })
+    }
+
+    // check to see if booking is today or in the past
+    const todayDate = new Date().toJSON().slice(0, 10)
+
+    if (todayDate === startDate) {
+        res.status(403);
+        return res.json({
+            message: "Sorry, cannot book for same day",
+            statusCode: 403,
+            errors: {
+                startDate: "Start date cannot be today",
+            }
+        })
+    }
+
+    if (todayDate > startDate) {
+        res.status(403);
+        return res.json({
+            message: "Sorry, cannot book for a past date",
+            statusCode: 403,
+            errors: {
+                startDate: "Start date cannot be in the past",
+            }
+        })
+    }
+
+    // check to see if booking end date is after booking start date
+    if (endDate <= startDate) {
+        res.status(400);
+        return res.json({
+            message: "Validation error",
+            statusCode: 400,
+            errors: {
+                "endDate": "endDate cannot be on or before startDate"
+            }
+        })
+    }
+
+    // check to see if bookings overlap
+    const existingBookings = await Booking.findAll({
+        where: { spotId: spotId },
+        raw: true
+    })
+
+    let errors = {}
+
+    for (let booking of existingBookings) {
+
+        console.log(booking)
+
+        // if start date is on or between existing dates
+        if (startDate >= booking.startDate && startDate <= booking.endDate) {
+            errors.startDate = "Start date conflicts with an existing booking"
+        }
+
+        // if end date is on or between existing dates
+        if (endDate >= booking.startDate && endDate <= booking.endDate) {
+            errors.endDate = "End date conflicts with an existing booking"
+        }
+
+        // if existing bookings are in between startDate and endDate
+        if (startDate <= booking.startDate && endDate >= booking.endDate) {
+            errors.startDate = "Start date conflicts with an existing booking"
+            errors.endDate = "End date conflicts with an existing booking"
+        }
+
+        const hasErrors = Object.keys(errors).length !== 0
+
+        if (hasErrors) {
+            res.status(403)
+            return res.json({
+                message: "Sorry, there are date conflicts with an existing booking",
+                statusCode: 403,
+                errors
+            })
+        }
+    }
+
+    const newBooking = await Booking.create({
+        spotId,
+        userId,
+        startDate,
+        endDate
+    })
+
+    // console.log(existingBookings)
+
+    return res.json({
+        "id": newBooking.id,
+        "spotId": spotId,
+        "userId": userId,
+        "startDate": startDate,
+        "endDate": endDate,
+        "createdAt": new Date(),
+        "updatedAt": new Date()
+    })
 })
 
 module.exports = router;
