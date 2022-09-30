@@ -65,8 +65,66 @@ const validateBooking = [
     handleValidationErrors
 ];
 
+const validateQueryParameters = [
+    check('page')
+        .isInt({ min: 1, max: 10 })
+        .optional()
+        .withMessage('Page must be greater than or equal to 1'),
+    check('size')
+        .isInt({ min: 1, max: 20 })
+        .optional()
+        .withMessage('Size must be greater than or equal to 1'),
+    check('minLat')
+        .isDecimal()
+        .optional()
+        .withMessage('Minimum latitude is invalid'),
+    check('maxLat')
+        .isDecimal()
+        .optional()
+        .withMessage('Maximum latitude is invalid'),
+    check('minLng')
+        .isDecimal()
+        .optional()
+        .withMessage('Minimum longitude is invalid'),
+    check('maxLng')
+        .isDecimal()
+        .optional()
+        .withMessage('Maximum longitude is invalid'),
+    check('minPrice')
+        .isDecimal({ min: 0 })
+        .optional()
+        .withMessage('Minimum price must be greater than or equal to 0'),
+    check('maxPrice')
+        .isDecimal({ min: 0 })
+        .optional()
+        .withMessage('Maximum price must be greater than or equal to 0'),
+    handleValidationErrors
+];
+
 // Get all spots
-router.get("/", async (req, res) => {
+
+// create pagination middleware
+function createPaginationObject(req, res, next) {
+    let defaultSize = 20, defaultPage = 1;
+    let { page, size } = req.query;
+    page = page === undefined ? defaultPage : parseInt(page);
+    size = size === undefined ? defaultSize : parseInt(size);
+
+    const pagination = {};
+    if (page >= 1 && size >= 1) {
+        pagination.limit = size;
+        pagination.offset = size * (page - 1);
+    }
+    req.pagination = pagination;
+    req.page = page;
+    req.size = size;
+    next();
+}
+
+router.get("/", validateQueryParameters, createPaginationObject, async (req, res) => {
+    page = parseInt(req.page)
+    size = parseInt(req.size)
+
     const spots = await Spot.findAll({
         include: [
             {
@@ -75,7 +133,8 @@ router.get("/", async (req, res) => {
             {
                 model: SpotImage
             }
-        ]
+        ],
+        ...req.pagination
     })
 
     let spotsList = []
@@ -124,7 +183,7 @@ router.get("/", async (req, res) => {
         delete spot.SpotImages
     }
 
-    res.json({ Spots: spotsList })
+    res.json({ Spots: spotsList, page, size })
 })
 
 // create a spot
@@ -448,7 +507,7 @@ router.get("/:spotId/reviews", async (req, res) => {
 
 router.post("/:spotId/bookings", [requireAuth, validateBooking], async (req, res) => {
     const { startDate, endDate } = req.body;
-    const { spotId } = req.params;
+    const spotId = parseInt(req.params.spotId);
     const userId = req.user.id;
 
     // query for spot
