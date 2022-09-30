@@ -517,7 +517,7 @@ router.post("/:spotId/bookings", [requireAuth, validateBooking], async (req, res
     if (!spot) {
         res.status(404);
         return res.json({
-            message: "Review couldn't be found",
+            message: "Spot couldn't be found",
             statusCode: 404
         })
     }
