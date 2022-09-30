@@ -1,8 +1,69 @@
 const express = require('express')
 const { requireAuth } = require("../../utils/auth");
 const { Booking, Review, ReviewImage, Spot, SpotImage, User, Sequelize } = require('../../db/models')
-const router = express.Router();
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
 const { Op } = require('sequelize')
+const router = express.Router();
+
+const validateSpot = [
+    check('address')
+        .exists({ checkFalsy: true })
+        .withMessage('Street address is required'),
+    check('city')
+        .exists({ checkFalsy: true })
+        .withMessage('City is required'),
+    check('state')
+        .exists({ checkFalsy: true })
+        .withMessage('State is required'),
+    check('country')
+        .exists({ checkFalsy: true })
+        .withMessage('Country is required'),
+    check('lat')
+        .exists({ checkFalsy: true })
+        .withMessage('Latitude is not valid'),
+    check('lng')
+        .exists({ checkFalsy: true })
+        .withMessage('Longitude is not valid'),
+    check('name')
+        .exists({ checkFalsy: true })
+        .isLength({ max: 50 })
+        .withMessage('Name must be less than 50 characters'),
+    check('description')
+        .exists({ checkFalsy: true })
+        .withMessage('Description is required'),
+    check('price')
+        .exists({ checkFalsy: true })
+        .withMessage('Price per day is required'),
+    handleValidationErrors
+];
+
+const validateReview = [
+    check('review')
+        .exists({ checkFalsy: true })
+        .withMessage('Review text is required'),
+    check('stars')
+        .exists({ checkFalsy: true })
+        .isInt({ min: 1, max: 5 })
+        .withMessage('Stars must be an integer from 1 to 5'),
+    handleValidationErrors
+];
+
+const validateBooking = [
+    check('startDate')
+        .exists({ checkFalsy: true })
+        .withMessage('Start date is required')
+        .bail()
+        .isDate()
+        .withMessage('Must be in date format, YYYY-MM-DD'),
+    check('endDate')
+        .exists({ checkFalsy: true })
+        .withMessage('End Date is required')
+        .bail()
+        .isDate()
+        .withMessage('Must be in date format, YYYY-MM-DD'),
+    handleValidationErrors
+];
 
 // Get all spots
 router.get("/", async (req, res) => {
@@ -63,11 +124,11 @@ router.get("/", async (req, res) => {
         delete spot.SpotImages
     }
 
-    res.json(spotsList)
+    res.json({ Spots: spotsList })
 })
 
 // create a spot
-router.post("/", requireAuth, async (req, res) => {
+router.post("/", [requireAuth, validateSpot], async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const ownerId = req.user.id
 
@@ -127,7 +188,7 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
 })
 
 // get all spots owned by the current user
-router.get("/current", async (req, res) => {
+router.get("/current", requireAuth, async (req, res) => {
     const userId = req.user.id
     const spots = await Spot.findAll({
         include: [
@@ -187,7 +248,7 @@ router.get("/current", async (req, res) => {
         delete spot.SpotImages
     }
 
-    res.json(spotsList)
+    res.json({ Spots: spotsList })
 })
 
 // get details for a spot from an id
@@ -295,9 +356,9 @@ router.put("/:spotId", requireAuth, async (req, res) => {
 })
 
 // Create a Review for a Spot based on the Spot's id
-router.post("/:spotId/reviews", requireAuth, async (req, res) => {
+router.post("/:spotId/reviews", [requireAuth, validateReview], async (req, res) => {
     const { review, stars } = req.body;
-    const { spotId } = req.params;
+    const spotId = parseInt(req.params.spotId);
     const userId = req.user.id;
 
     // query for spot
@@ -385,7 +446,7 @@ router.get("/:spotId/reviews", async (req, res) => {
 
 // Create a Booking from a Spot based on the Spot's id
 
-router.post("/:spotId/bookings", requireAuth, async (req, res) => {
+router.post("/:spotId/bookings", [requireAuth, validateBooking], async (req, res) => {
     const { startDate, endDate } = req.body;
     const { spotId } = req.params;
     const userId = req.user.id;

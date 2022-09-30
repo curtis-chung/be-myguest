@@ -3,7 +3,25 @@ const { requireAuth } = require("../../utils/auth");
 const { Booking, Review, ReviewImage, Spot, SpotImage, User, Sequelize } = require('../../db/models')
 const router = express.Router();
 const { Op, DATE } = require('sequelize');
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
 const spot = require('../../db/models/spot');
+
+const validateBooking = [
+    check('startDate')
+        .exists({ checkFalsy: true })
+        .withMessage('Start date is required')
+        .bail()
+        .isDate()
+        .withMessage('Must be in date format, YYYY-MM-DD'),
+    check('endDate')
+        .exists({ checkFalsy: true })
+        .withMessage('End Date is required')
+        .bail()
+        .isDate()
+        .withMessage('Must be in date format, YYYY-MM-DD'),
+    handleValidationErrors
+];
 
 // Get all of the Current User's Bookings
 router.get("/current", async (req, res) => {
@@ -43,7 +61,7 @@ router.get("/current", async (req, res) => {
 })
 
 // edit a booking
-router.put("/:bookingId", requireAuth, async (req, res) => {
+router.put("/:bookingId", [requireAuth, validateBooking], async (req, res) => {
     const { startDate, endDate } = req.body;
     const { bookingId } = req.params
     const userId = req.user.id

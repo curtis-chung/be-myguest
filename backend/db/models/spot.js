@@ -33,23 +33,18 @@ module.exports = (sequelize, DataTypes) => {
     address: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notNull: {
-          msg: "Must enter an address"
-        }
-      }
     },
     city: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     state: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     country: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     lat: {
       type: DataTypes.FLOAT,
@@ -61,15 +56,15 @@ module.exports = (sequelize, DataTypes) => {
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     description: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     price: {
       type: DataTypes.FLOAT,
-      allowNull: false
+      allowNull: false,
     }
   }, {
     sequelize,
