@@ -30,7 +30,8 @@ router.get("/current", async (req, res) => {
     const Bookings = await Booking.findAll({
         where: { userId: userId },
         include: {
-            model: Spot
+            model: Spot,
+            attributes: { exclude: ["description"] }
         },
     })
 

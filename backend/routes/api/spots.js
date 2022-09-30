@@ -578,7 +578,7 @@ router.post("/:spotId/bookings", [requireAuth, validateBooking], async (req, res
 
     for (let booking of existingBookings) {
 
-        console.log(booking)
+        //console.log(booking)
 
         // if start date is on or between existing dates
         if (startDate >= booking.startDate && startDate <= booking.endDate) {
