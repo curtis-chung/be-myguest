@@ -6,7 +6,7 @@ body {
     overflow: hidden;
 }
 
-.container {
+.sign-up-container {
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -21,7 +21,7 @@ body {
     align-items: center;
 }
 
-.container-header {
+.sign-up-container-header {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,7 +54,7 @@ body {
     background-color: rgb(243, 243, 243);
 }
 
-.log-in-or-sign-up {
+.sign-up-for-bemyguest {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,7 +62,7 @@ body {
     font-size: 16;
 }
 
-.container-body {
+.sign-up-container-body {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,7 +70,7 @@ body {
     height: 618px;
 }
 
-.form-box {
+.sign-up-form-box {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,7 +78,7 @@ body {
     height: 562 px;
 }
 
-.container-body-content {
+.sign-up-container-body-content {
     display: flex;
     flex-direction: column;
     justify-content: ;
@@ -97,20 +97,12 @@ body {
     font-size: 22px;
 }
 
-.inputs {
-    height: 112px;
+.sign-up-inputs {
+    height: 226px;
     width: 520px;
     margin-top: 28px;
     border-radius: 8px;
     border: 1px solid lightgray;
-}
-
-.input-fields-1 {
-    box-sizing: border-box;
-    border: 0px solid transparent;
-    border-radius: 8px;
-    width: 520px;
-    height: 55.5px;
 }
 
 .line {
@@ -118,7 +110,7 @@ body {
     box-sizing: border-box;
 }
 
-.input-fields-2 {
+.sign-up-input-fields-1 {
     box-sizing: border-box;
     border: 0px solid transparent;
     border-radius: 8px;
@@ -126,7 +118,31 @@ body {
     height: 55.5px;
 }
 
-.login-button {
+.sign-up-input-fields-2 {
+    box-sizing: border-box;
+    border: 0px solid transparent;
+    border-radius: 8px;
+    width: 520px;
+    height: 55.5px;
+}
+
+.sign-up-input-fields-3 {
+    box-sizing: border-box;
+    border: 0px solid transparent;
+    border-radius: 8px;
+    width: 520px;
+    height: 55.5px;
+}
+
+.sign-up-input-fields-4 {
+    box-sizing: border-box;
+    border: 0px solid transparent;
+    border-radius: 8px;
+    width: 520px;
+    height: 55.5px;
+}
+
+.sign-up-signup-button {
     box-sizing: border-box;
     width: 520px;
     height: 50px;
