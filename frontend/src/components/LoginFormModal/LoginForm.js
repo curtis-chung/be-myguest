@@ -25,6 +25,11 @@ function LoginForm() {
             });
     }
 
+    const loginDemoUser = (e) => {
+        e.preventDefault();
+        return dispatch(sessionActions.login({ credential: `john.smith@gmail.com`, password: "secret password" }))
+    }
+
     return (
         <div className='container'>
             <div className="container-header">
@@ -44,7 +49,7 @@ function LoginForm() {
                                         onChange={(e) => setCredential(e.target.value)}
                                         required
                                         placeholder="Username or email"
-                                        className="input-fields-1"
+                                        className="input-fields"
                                     />
                                 </label>
                             </div>
@@ -57,16 +62,19 @@ function LoginForm() {
                                         onChange={(e) => setPassword(e.target.value)}
                                         required
                                         placeholder='Password'
-                                        className="input-fields-2"
+                                        className="input-fields"
                                     />
                                 </label>
                             </div>
                         </div>
                         <ul>
-                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                            {errors.map((error, idx) => <li key={idx} className="login-error">{error}</li>)}
                         </ul>
-                        <div>
+                        <div className='login-button-div'>
                             <button type="submit" className="login-button">Log In</button>
+                        </div>
+                        <div className="demo-button-div">
+                            <button type="submit" className="login-button" onClick={loginDemoUser}>Demo Log In</button>
                         </div>
                     </div>
                 </form>

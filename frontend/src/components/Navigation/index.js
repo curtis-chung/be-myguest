@@ -19,7 +19,6 @@ function Navigation({ isLoaded }) {
         sessionLinks = (
             <>
                 <LoginFormModal />
-                {/* <NavLink to="/login">Log In</NavLink> */}
                 <SignupFormModal />
             </>
         );
@@ -35,11 +34,11 @@ function Navigation({ isLoaded }) {
             </div>
 
             <div className='navbar-right'>
-                <div className='become-a-host-div'>
+                {sessionUser && <div className='become-a-host-div'>
                     <button className="become-a-host-button">
                         Become a Host
                     </button>
-                </div>
+                </div>}
                 <div className='menu-div'>
                     {isLoaded && sessionLinks}
                 </div>

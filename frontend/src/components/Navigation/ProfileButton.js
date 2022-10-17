@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
+import './Profile.css';
 
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
@@ -30,18 +31,40 @@ function ProfileButton({ user }) {
 
     return (
         <>
-            <button onClick={openMenu}>
-                <i class="fa-solid fa-bars"></i>
-                <i class="fa-solid fa-circle-user"></i>
+            <button onClick={openMenu} className="profile-button">
+                <div className="bars">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                <div className="circle-user">
+                    <i class="fa-solid fa-circle-user"></i>
+                </div>
+
             </button>
             {showMenu && (
-                <ul className="profile-dropdown">
-                    <li>{user.username}</li>
-                    <li>{user.email}</li>
-                    <li>
-                        <button onClick={logout}>Log Out</button>
-                    </li>
-                </ul>
+                <div className="profile-dropdown-container">
+                    <div className="profile-dropdown-contents">
+                        <div className="profile-dropdown-personal-info">
+                            <div>{user.username}</div>
+                            <div>{user.email}</div>
+                        </div>
+
+                        <div className='line'></div>
+
+                        <div className="profile-dropdown-content">
+                            Manage Trips
+                        </div>
+
+                        <div className='line'></div>
+
+                        <div className="profile-dropdown-content">
+                            Manage Reviews
+                        </div>
+
+                        <div className='line'></div>
+
+                        <div onClick={logout} className="profile-dropdown-content">Log Out</div>
+                    </div>
+                </div>
             )}
         </>
     );
