@@ -18,7 +18,7 @@
 }
 
 .navbar-left {
-    border: 1px solid blue;
+    border: 10px solid red;
     box-sizing: border-box;
     align-items: center;
     justify-content: center;
@@ -27,7 +27,7 @@
 }
 
 .navbar-right {
-    border: 1px solid red;
+    border: none;
     display: flex;
     box-sizing: border-box;
     align-items: center;
@@ -42,7 +42,7 @@
 .menu-div {
     width: fit-content;
     height: 42px;
-    border: yellowgreen solid 1px;
+    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -63,4 +63,10 @@
 .become-a-host-button:hover {
     border: 1px solid transparent;
     background-color: rgb(243, 243, 243);
+}
+
+.login-signup-buttons {
+    height: 42px;
+    width: 300px;
+    color: red
 }

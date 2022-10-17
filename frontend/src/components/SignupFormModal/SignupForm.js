@@ -5,7 +5,7 @@ import * as sessionActions from "../../store/session";
 import "../SignupFormPage/SignupForm.css"
 import { Modal } from "../../context/Modal"
 
-function SignupForm() {
+function SignupForm({ clickedX }) {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const [email, setEmail] = useState("");
@@ -35,7 +35,7 @@ function SignupForm() {
     return (
         <div className='sign-up-container'>
             <div className="sign-up-container-header">
-                <button onClick={() => setShowModal(false)} className='close-button'>x</button>
+                <button onClick={clickedX} className='close-button'>x</button>
                 <div className="sign-up-for-bemyguest">Log in or sign up</div>
             </div>
             <div className="sign-up-container-body">

@@ -2,13 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import './Profile.css';
-import LoginFormModal from '../LoginFormModal';
-import SignupFormModal from '../SignupFormModal';
-import { Modal } from '../../context/Modal';
-import LoginForm from "../LoginFormModal/LoginForm";
-import SignupForm from "../SignupFormModal/SignupForm";
 
-function ProfileButton({ user }) {
+function ProfileButtonNotLoggedIn({ user }) {
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
 
@@ -34,19 +29,6 @@ function ProfileButton({ user }) {
         dispatch(sessionActions.logout());
     };
 
-    let signinAndSignout;
-
-    const [signinModal, setSigninModal] = useState(false);
-    const [signupModal, setSignUpModal] = useState(false);
-
-    const signinX = () => {
-        setSigninModal(false)
-    }
-
-    const signupX = () => {
-        setSignUpModal(false)
-    }
-
     return (
         <>
             <button onClick={openMenu} className="profile-button">
@@ -58,7 +40,7 @@ function ProfileButton({ user }) {
                 </div>
 
             </button>
-            {showMenu && user && (
+            {showMenu && (
                 <div className="profile-dropdown-container">
                     <div className="profile-dropdown-contents">
                         <div className="profile-dropdown-personal-info">
@@ -84,26 +66,8 @@ function ProfileButton({ user }) {
                     </div>
                 </div>
             )}
-            {showMenu && !user && (
-                <div className="profile-dropdown-container">
-                    <div className="profile-dropdown-contents">
-                        <div onClick={() => setSigninModal(true)} className="profile-dropdown-content-login">Log In</div>
-                        <div onClick={() => setSignUpModal(true)} className="profile-dropdown-content">Sign Up</div>
-                    </div>
-                </div>
-            )}
-            {signinModal && (
-                <Modal onClose={() => setSigninModal(false)}>
-                    <LoginForm clickedX={signinX} />
-                </Modal>
-            )}
-            {signupModal && (
-                <Modal onClose={() => setSignUpModal(false)}>
-                    <SignupForm clickedX={signupX} />
-                </Modal>
-            )}
         </>
     );
 }
 
-export default ProfileButton;
+export default ProfileButtonNotLoggedIn;
