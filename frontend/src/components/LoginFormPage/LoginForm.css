@@ -1,9 +1,14 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: sans-serif;
     height: 100vh;
     overflow: hidden;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
 }
 
 .container {
@@ -81,7 +86,6 @@ body {
 .container-body-content {
     display: flex;
     flex-direction: column;
-    justify-content: ;
     align-items: center;
     position: relative;
     box-sizing: border-box;
@@ -105,7 +109,7 @@ body {
     border: 1px solid lightgray;
 }
 
-.input-fields-1 {
+.input-fields {
     box-sizing: border-box;
     border: 0px solid transparent;
     border-radius: 8px;
@@ -116,14 +120,6 @@ body {
 .line {
     border-bottom: 1px solid lightgray;
     box-sizing: border-box;
-}
-
-.input-fields-2 {
-    box-sizing: border-box;
-    border: 0px solid transparent;
-    border-radius: 8px;
-    width: 520px;
-    height: 55.5px;
 }
 
 .login-button {
@@ -137,4 +133,18 @@ body {
     color: white;
     font-size: 16px;
     font-weight: bold;
+}
+
+.login-button-div {
+    margin-top: 16px;
+}
+
+.demo-button-div {
+    margin-top: 16px;
+}
+
+.login-error {
+    color: red;
+    font-size: 12px;
+    font-weight: 400px;
 }

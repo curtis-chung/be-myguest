@@ -3,15 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import "../SignupFormPage/SignupForm.css"
+import { Modal } from "../../context/Modal"
 
 function SignupForm() {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
+    const [showModal, setShowModal] = useState(false);
 
     if (sessionUser) return <Redirect to="/" />;
 
@@ -19,7 +23,7 @@ function SignupForm() {
         e.preventDefault();
         if (password === confirmPassword) {
             setErrors([]);
-            return dispatch(sessionActions.signup({ email, username, password }))
+            return dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
                 .catch(async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
@@ -31,7 +35,7 @@ function SignupForm() {
     return (
         <div className='sign-up-container'>
             <div className="sign-up-container-header">
-                <button className='close-button'>x</button>
+                <button onClick={() => setShowModal(false)} className='close-button'>x</button>
                 <div className="sign-up-for-bemyguest">Log in or sign up</div>
             </div>
             <div className="sign-up-container-body">
@@ -47,7 +51,7 @@ function SignupForm() {
                                         onChange={(e) => setEmail(e.target.value)}
                                         required
                                         placeholder="Email"
-                                        className="sign-up-input-fields-1"
+                                        className="sign-up-input-fields"
                                     />
                                 </label>
                             </div>
@@ -60,7 +64,33 @@ function SignupForm() {
                                         onChange={(e) => setUsername(e.target.value)}
                                         required
                                         placeholder="Username"
-                                        className="sign-up-input-fields-2"
+                                        className="sign-up-input-fields"
+                                    />
+                                </label>
+                            </div>
+                            <div className='line'></div>
+                            <div>
+                                <label>
+                                    <input
+                                        type="text"
+                                        value={firstName}
+                                        onChange={(e) => setFirstName(e.target.value)}
+                                        required
+                                        placeholder="First Name"
+                                        className="sign-up-input-fields"
+                                    />
+                                </label>
+                            </div>
+                            <div className='line'></div>
+                            <div>
+                                <label>
+                                    <input
+                                        type="text"
+                                        value={lastName}
+                                        onChange={(e) => setLastName(e.target.value)}
+                                        required
+                                        placeholder="Last Name"
+                                        className="sign-up-input-fields"
                                     />
                                 </label>
                             </div>
@@ -73,7 +103,7 @@ function SignupForm() {
                                         onChange={(e) => setPassword(e.target.value)}
                                         required
                                         placeholder="Password"
-                                        className="sign-up-input-fields-3"
+                                        className="sign-up-input-fields"
                                     />
                                 </label>
                             </div>
@@ -86,15 +116,15 @@ function SignupForm() {
                                         onChange={(e) => setConfirmPassword(e.target.value)}
                                         required
                                         placeholder="Confirm Password"
-                                        className="sign-up-input-fields-4"
+                                        className="sign-up-input-fields"
                                     />
                                 </label>
                             </div>
                         </div>
                         <ul>
-                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                            {errors.map((error, idx) => <li key={idx} className="sign-up-error">{error}</li>)}
                         </ul>
-                        <div>
+                        <div className="signup-button-div">
                             <button type="submit" className="sign-up-signup-button">Sign Up</button>
                         </div>
                     </div>
