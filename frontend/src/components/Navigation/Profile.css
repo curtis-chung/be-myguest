@@ -63,3 +63,13 @@
 .profile-dropdown-content:hover {
     background-color: rgb(243, 243, 243);
 }
+
+.profile-dropdown-content-login {
+    padding: 15px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.profile-dropdown-content-login:hover {
+    background-color: rgb(243, 243, 243);
+}

@@ -11,18 +11,21 @@ function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
 
     let sessionLinks;
-    if (sessionUser) {
-        sessionLinks = (
-            <ProfileButton user={sessionUser} />
-        );
-    } else {
-        sessionLinks = (
-            <>
-                <LoginFormModal />
-                <SignupFormModal />
-            </>
-        );
-    }
+    // if (sessionUser) {
+    //     sessionLinks = (
+    //         <ProfileButton user={sessionUser} />
+    //     );
+    // } else {
+    //     sessionLinks = (
+    //         <>
+    //             <LoginFormModal />
+    //             <SignupFormModal />
+    //         </>
+    //     );
+    // }
+    sessionLinks = (
+        <ProfileButton user={sessionUser} />
+    )
 
     return (
         <nav className="navbar">
@@ -34,7 +37,12 @@ function Navigation({ isLoaded }) {
             </div>
 
             <div className='navbar-right'>
-                {sessionUser && <div className='become-a-host-div'>
+                {/* {sessionUser && <div className='become-a-host-div'>
+                    <button className="become-a-host-button">
+                        Become a Host
+                    </button>
+                </div>} */}
+                {<div className='become-a-host-div'>
                     <button className="become-a-host-button">
                         Become a Host
                     </button>

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import '../LoginFormPage/LoginForm.css';
 
-function LoginForm() {
+function LoginForm({ clickedX }) {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const [credential, setCredential] = useState('');
@@ -19,6 +19,7 @@ function LoginForm() {
         e.preventDefault();
         setErrors([]);
         return dispatch(sessionActions.login({ credential, password }))
+            .then(clickedX)
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
@@ -28,12 +29,13 @@ function LoginForm() {
     const loginDemoUser = (e) => {
         e.preventDefault();
         return dispatch(sessionActions.login({ credential: `john.smith@gmail.com`, password: "secret password" }))
+            .then(clickedX)
     }
 
     return (
         <div className='container'>
             <div className="container-header">
-                <button className='close-button'>x</button>
+                <button onClick={clickedX} className='close-button'>x</button>
                 <div className="log-in-or-sign-up">Log in or sign up</div>
             </div>
             <div className="container-body">
