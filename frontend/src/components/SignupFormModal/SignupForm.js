@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import "../SignupFormPage/SignupForm.css"
-import { Modal } from "../../context/Modal"
 
 function SignupForm({ clickedX }) {
     const dispatch = useDispatch();
@@ -15,7 +14,6 @@ function SignupForm({ clickedX }) {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
-    const [showModal, setShowModal] = useState(false);
 
     if (sessionUser) return <Redirect to="/" />;
 
@@ -24,6 +22,7 @@ function SignupForm({ clickedX }) {
         if (password === confirmPassword) {
             setErrors([]);
             return dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
+                .then(clickedX)
                 .catch(async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
