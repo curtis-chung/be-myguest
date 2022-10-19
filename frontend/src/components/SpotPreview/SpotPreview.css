@@ -1,0 +1,47 @@
+.spot-preview-container {
+    border: 5px solid black;
+    margin-bottom: 50px;
+    height: 600px;
+    width: 400px;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+
+.link-container {
+    border: 5px solid blue;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+.spot-image-container {
+    display: flex;
+    box-sizing: border-box;
+    height: 60%
+}
+
+.spot-image {
+    height: 100%;
+    width: 100%;
+    border: 5px solid orange;
+    border-radius: 20px;
+
+}
+
+.spot-info-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 40%;
+    color: black;
+    border: 5px solid red;
+}
+
+.spot-info-top {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+}

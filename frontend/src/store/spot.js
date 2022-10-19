@@ -58,10 +58,8 @@ export const createSpot = (spot) => async (dispatch) => {
     if (response.ok) {
         const newSpot = await response.json()
         dispatch(createSpotAction(newSpot))
+        return newSpot
     }
-
-    // Return the response object
-    return newSpot
 }
 
 export const getAllSpot = () => async (dispatch) => {
@@ -122,33 +120,35 @@ const initialState = {
 
 // Reducers
 
-export const spotReducer = (state = initialState, action) => {
+const spotReducer = (state = initialState, action) => {
     const newState = { ...state }
     switch (action.type) {
         case CREATE_SPOT:
-            newState[action.spot.id] = action.spot
+            newState.allSpot[action.spot.id] = action.spot
             return newState
 
         case GET_ALL_SPOT:
             const allSpotsList = {};
-            newState.list.forEach(spot => {
+            action.list.forEach(spot => {
                 allSpotsList[spot.id] = spot
             })
-            return newState
+            return newState.allSpot = allSpotsList
 
         case GET_ONE_SPOT:
-            newState[action.spot.id] = action.spot
+            newState.oneSpot[action.spot.id] = action.spot
             return newState
 
         case EDIT_SPOT:
-            newState[action.spot.id] = action.spot
+            newState.allSpot[action.spot.id] = action.spot
             return newState
 
         case DELETE_SPOT:
-            delete newState[action.id]
+            delete newState.allSpot[action.id]
             return newState
 
         default:
             return state
     }
 }
+
+export default spotReducer;

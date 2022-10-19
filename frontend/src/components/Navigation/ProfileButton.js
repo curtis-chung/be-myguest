@@ -34,8 +34,6 @@ function ProfileButton({ user }) {
         dispatch(sessionActions.logout());
     };
 
-    let signinAndSignout;
-
     const [signinModal, setSigninModal] = useState(false);
     const [signupModal, setSignUpModal] = useState(false);
 

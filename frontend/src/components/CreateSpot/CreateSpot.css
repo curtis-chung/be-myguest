@@ -1,0 +1,148 @@
+.create-spot-container {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    height: fit-content;
+    width: 568px;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.create-spot-container-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid lightgray;
+    width: 568px;
+    height: 64px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.close-button {
+    display: flex;
+    position: absolute;
+    left: 15px;
+    border-radius: 50%;
+    padding: 0.5em;
+    width: 30px;
+    height: 30px;
+    border: 1px solid transparent;
+    color: black;
+    background-color: white;
+    font-weight: 500;
+    font-size: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-button:hover {
+    border: 1px solid transparent;
+    background-color: rgb(243, 243, 243);
+}
+
+.create-spot-for-bemyguest {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 16;
+}
+
+.create-spot-container-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 568px;
+    height: 618px;
+}
+
+.create-spot-form-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 520px;
+    height: 562px;
+}
+
+.create-spot-container-body-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    width: 520px;
+    height: 562px;
+}
+
+.welcome {
+    text-align: left;
+    width: 520px;
+    height: 30px;
+    font-weight: 600;
+    font-size: 22px;
+}
+
+.create-spot-inputs {
+    height: fit-content;
+    width: 520px;
+    margin-top: 28px;
+    border-radius: 8px;
+    border: 1px solid lightgray;
+}
+
+.line {
+    border-bottom: 1px solid lightgray;
+    box-sizing: border-box;
+}
+
+.create-spot-input-fields {
+    box-sizing: border-box;
+    border: 0px solid transparent;
+    border-radius: 8px;
+    width: 520px;
+    height: 55.5px;
+}
+
+.text-area-div {
+    width: 520px;
+    height: 75px;
+}
+
+.create-spot-text-area-fields {
+    box-sizing: border-box;
+    border: 0px solid transparent;
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+    resize: none;
+}
+
+.create-spot-button {
+    box-sizing: border-box;
+    width: 520px;
+    height: 50px;
+    border: 1px solid rgb(189, 30, 89);
+    background: rgb(189, 30, 89);
+    cursor: pointer;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.create-spot-button-div {
+    margin-top: 16px;
+}
+
+.create-spot-error {
+    color: red;
+    font-size: 12px;
+    font-weight: 400px;
+}
