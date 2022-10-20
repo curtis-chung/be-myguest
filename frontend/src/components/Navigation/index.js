@@ -78,7 +78,7 @@ function Navigation({ isLoaded }) {
                     {isLoaded && sessionLinks}
                 </div>
             </div>
-        </nav >
+        </nav>
     );
 }
 
