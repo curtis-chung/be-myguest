@@ -10,6 +10,8 @@
     border-bottom: 1px solid lightgray;
     position: fixed;
     font-family: sans-serif;
+    top: 0;
+    left: 0;
 }
 
 .logo {

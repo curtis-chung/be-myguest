@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./SpotPreview.css"
 
 const SpotPreview = ({ spot }) => {
-    console.log(spot)
+    // console.log(spot)
     return (
         <div className="spot-preview-container">
             <Link className="link-container" to={`/spots/${spot.id}`}>
