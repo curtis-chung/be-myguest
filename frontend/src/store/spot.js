@@ -48,7 +48,7 @@ export const createSpot = (spot) => async (dispatch) => {
     // When the spot is successfully created
     if (response.ok) {
         const newSpot = await response.json()
-        dispatch(createSpotAction(newSpot))
+        // dispatch(createSpotAction(newSpot))
         return newSpot
     }
 }
@@ -95,10 +95,6 @@ export const deleteSpot = (spotId) => async (dispatch) => {
         method: "DELETE",
     })
 
-    if (response.ok) {
-        dispatch(deleteSpotAction(spotId))
-    }
-
     return response
 }
 
@@ -113,16 +109,17 @@ const initialState = {
 const spotReducer = (state = initialState, action) => {
     const newState = { ...state }
     switch (action.type) {
-        case CREATE_SPOT:
-            newState.allSpot[action.spot.id] = action.spot
-            return newState
+        // case CREATE_SPOT:
+        //     newState.allSpot[action.spot.id] = action.spot
+        //     return newState
 
         case GET_ALL_SPOT:
             const allSpotsList = {};
             action.list.forEach(spot => {
                 allSpotsList[spot.id] = spot
             })
-            return newState.allSpot = allSpotsList
+            newState.allSpot = allSpotsList
+            return newState
 
         case GET_ONE_SPOT:
             newState.oneSpot = action.spot
@@ -130,10 +127,6 @@ const spotReducer = (state = initialState, action) => {
 
         case EDIT_SPOT:
             newState.oneSpot[action.spot.id] = action.spot
-            return newState
-
-        case DELETE_SPOT:
-            delete newState.allSpot[action.id]
             return newState
 
         default:

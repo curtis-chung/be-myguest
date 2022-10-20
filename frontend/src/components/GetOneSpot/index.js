@@ -5,10 +5,12 @@ import * as spotActions from "../../store/spot"
 import "./GetOneSpot.css"
 import { Modal } from '../../context/Modal';
 import EditSpotForm from "../EditASpot";
+// import DeleteSpot from "../DeleteASpot";
 
 const GetOneSpot = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
+    const history = useHistory();
 
     let spotImageArr;
     let spotImages = []
@@ -35,6 +37,14 @@ const GetOneSpot = () => {
 
     const editSpotX = () => {
         setEditSpotModal(false)
+    }
+
+    const handleClick = async (e) => {
+        e.preventDefault();
+
+        const deleteSpot = await dispatch(spotActions.deleteSpot(spotId))
+            .then(dispatch(spotActions.getAllSpot()))
+            .then(history.push(`/`))
     }
 
     useEffect(() => {
@@ -111,6 +121,10 @@ const GetOneSpot = () => {
                                     <EditSpotForm clickedX={editSpotX} />
                                 </Modal>
                             }
+                        </div>
+
+                        <div>
+                            <button onClick={handleClick} type="submit" className="delete-spot-button">Delete</button>
                         </div>
                     </div>
                 </div>
