@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as spotActions from "../../store/spot"
 import "./GetOneSpot.css"
+import { Modal } from '../../context/Modal';
+import EditSpotForm from "../EditASpot";
 
 const GetOneSpot = () => {
     const { spotId } = useParams();
@@ -11,7 +13,7 @@ const GetOneSpot = () => {
     let spotImageArr;
     let spotImages = []
 
-    let spotById = useSelector((state) => {
+    const spotById = useSelector((state) => {
         return state?.spot?.oneSpot // {}
     })
 
@@ -27,7 +29,13 @@ const GetOneSpot = () => {
 
     // console.log(spotImageArr)
     // console.log(spotById)
-    console.log(spotImages)
+    // console.log(spotImages)
+
+    const [editSpotModal, setEditSpotModal] = useState(false);
+
+    const editSpotX = () => {
+        setEditSpotModal(false)
+    }
 
     useEffect(() => {
         dispatch(spotActions.getOneSpot(spotId))
@@ -92,6 +100,17 @@ const GetOneSpot = () => {
                         <div className="get-one-spot-body-bottom">
                             <div>Entire home hosted by {spotById?.Owner?.firstName}</div>
                             <div>{spotById?.description}</div>
+                        </div>
+
+                        <div className="edit-spot-button-div">
+                            <button onClick={() => setEditSpotModal(true)} className="become-a-host-button">
+                                Edit
+                            </button>
+                            {editSpotModal &&
+                                <Modal Modal onClose={() => setEditSpotModal(false)}>
+                                    <EditSpotForm clickedX={editSpotX} />
+                                </Modal>
+                            }
                         </div>
                     </div>
                 </div>

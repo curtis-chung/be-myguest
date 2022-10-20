@@ -1,21 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import * as spotActions from "../../store/spot"
-import "./CreateSpot.css"
+import "./EditASpot.css"
 
-const CreateSpotForm = ({ clickedX }) => {
+const EditSpotForm = ({ clickedX }) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [address, setAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [country, setCountry] = useState("");
+    const { spotId } = useParams();
+    const spotById = useSelector((state) => {
+        return state?.spot?.oneSpot
+    })
+
+    console.log(spotById)
+
+    const [address, setAddress] = useState(spotById?.address);
+    const [city, setCity] = useState(spotById?.city);
+    const [state, setState] = useState(spotById?.state);
+    const [country, setCountry] = useState(spotById?.country);
     const [lat, setLat] = useState("");
     const [lng, setLng] = useState("");
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState("");
+    const [name, setName] = useState(spotById?.name);
+    const [description, setDescription] = useState(spotById?.description);
+    const [price, setPrice] = useState(spotById?.price);
     const [imgUrl, setImgUrl] = useState("");
     const [errors, setErrors] = useState([]);
 
@@ -32,24 +39,28 @@ const CreateSpotForm = ({ clickedX }) => {
             price: price,
         }
 
-        const createdSpot = await dispatch(spotActions.createSpot(spot))
+        const editSpot = await dispatch(spotActions.editSpot(spot, spotId))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
             });
     }
 
+    useEffect(() => {
+        dispatch(spotActions.getOneSpot(spotId))
+    }, [dispatch]);
+
     return (
-        <div className='create-spot-container'>
-            <div className="create-spot-container-header">
+        <div className='edit-spot-container'>
+            <div className="edit-spot-container-header">
                 <button onClick={clickedX} className='close-button'>x</button>
-                <div className="create-spot-for-bemyguest">Become a Host</div>
+                <div className="edit-spot-for-bemyguest">Edit Review</div>
             </div>
-            <div className="create-spot-container-body">
-                <form onSubmit={handleSubmit} className="create-spot-form-box">
-                    <div className="create-spot-container-body-content">
+            <div className="edit-spot-container-body">
+                <form onSubmit={handleSubmit} className="edit-spot-form-box">
+                    <div className="edit-spot-container-body-content">
                         <div className="welcome">Welcome to Be-myguest</div>
-                        <div className='create-spot-inputs'>
+                        <div className='edit-spot-inputs'>
                             <div>
                                 <label>
                                     <input
@@ -58,7 +69,7 @@ const CreateSpotForm = ({ clickedX }) => {
                                         onChange={(e) => setAddress(e.target.value)}
                                         required
                                         placeholder="Address"
-                                        className="create-spot-input-fields"
+                                        className="edit-spot-input-fields"
                                     />
                                 </label>
                             </div>
@@ -71,7 +82,7 @@ const CreateSpotForm = ({ clickedX }) => {
                                         onChange={(e) => setCity(e.target.value)}
                                         required
                                         placeholder="City"
-                                        className="create-spot-input-fields"
+                                        className="edit-spot-input-fields"
                                     />
                                 </label>
                             </div>
@@ -84,7 +95,7 @@ const CreateSpotForm = ({ clickedX }) => {
                                         onChange={(e) => setState(e.target.value)}
                                         required
                                         placeholder="State"
-                                        className="create-spot-input-fields"
+                                        className="edit-spot-input-fields"
                                     />
                                 </label>
                             </div>
@@ -97,7 +108,7 @@ const CreateSpotForm = ({ clickedX }) => {
                                         onChange={(e) => setCountry(e.target.value)}
                                         required
                                         placeholder="Country"
-                                        className="create-spot-input-fields"
+                                        className="edit-spot-input-fields"
                                     />
                                 </label>
                             </div>
@@ -110,7 +121,7 @@ const CreateSpotForm = ({ clickedX }) => {
                                         onChange={(e) => setName(e.target.value)}
                                         required
                                         placeholder="Name"
-                                        className="create-spot-input-fields"
+                                        className="edit-spot-input-fields"
                                     />
                                 </label>
                             </div>
@@ -122,7 +133,7 @@ const CreateSpotForm = ({ clickedX }) => {
                                     onChange={(e) => setDescription(e.target.value)}
                                     required
                                     placeholder="Description"
-                                    className="create-spot-text-area-fields"
+                                    className="edit-spot-text-area-fields"
                                 />
                             </div>
                             <div className='line'></div>
@@ -135,13 +146,13 @@ const CreateSpotForm = ({ clickedX }) => {
                                         required
                                         placeholder="Price"
                                         min="1"
-                                        className="create-spot-input-fields"
+                                        className="edit-spot-input-fields"
                                     />
                                 </label>
                             </div>
                         </div>
-                        <div className="create-spot-button-div">
-                            <button type="submit" className="create-spot-button">Let's Host</button>
+                        <div className="edit-spot-button-div">
+                            <button type="submit" className="edit-spot-button">Save Changes</button>
                         </div>
                     </div>
                 </form>
@@ -150,4 +161,4 @@ const CreateSpotForm = ({ clickedX }) => {
     );
 }
 
-export default CreateSpotForm;
+export default EditSpotForm;

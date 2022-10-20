@@ -16,7 +16,7 @@ const GetAllSpot = () => {
     spotsArr = Object.values(spotsObj) // empty []
 
     // console.log(allSpots)
-    console.log(spotsArr)
+    // console.log(spotsArr)
     // console.log(spotActions)
 
     useEffect(() => {
@@ -29,7 +29,7 @@ const GetAllSpot = () => {
                 <div className="get-all-spot-container">
                     <div className="get-all-spot-body">
                         {spotsArr.map((spot) => (
-                            <SpotPreview key={spot.id} spot={spot} />
+                            <SpotPreview spot={spot} />
                         ))}
                     </div>
                 </div>
