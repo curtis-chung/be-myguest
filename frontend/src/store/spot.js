@@ -33,15 +33,6 @@ const deleteSpotAction = (id) => ({
     id
 })
 
-// Normalize data
-function defaultState(a) {
-    const s = {};
-    a.forEach(b => {
-        s[b.id] = b
-    });
-    return s
-}
-
 // Thunks
 
 export const createSpot = (spot) => async (dispatch) => {
@@ -78,8 +69,7 @@ export const getOneSpot = (spotId) => async (dispatch) => {
 
     if (response.ok) {
         const currentSpot = await response.json()
-        const normalizedSpot = defaultState(currentSpot)
-        dispatch(getOneSpotAction(normalizedSpot))
+        dispatch(getOneSpotAction(currentSpot))
     }
 }
 
@@ -135,7 +125,7 @@ const spotReducer = (state = initialState, action) => {
             return newState.allSpot = allSpotsList
 
         case GET_ONE_SPOT:
-            newState.oneSpot[action.spot.id] = action.spot
+            newState.oneSpot = action.spot
             return newState
 
         case EDIT_SPOT:
