@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import * as spotActions from "../../store/spot"
 import "./CreateSpot.css"
 
@@ -22,7 +22,7 @@ const CreateSpotForm = ({ clickedX }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let spot = {
+        const spot = {
             address: address,
             city: city,
             state: state,
@@ -37,6 +37,13 @@ const CreateSpotForm = ({ clickedX }) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
             });
+
+        if (createdSpot) {
+            console.log(createdSpot)
+            clickedX()
+            await dispatch(spotActions.getOneSpot(createdSpot.id))
+            history.push(`/spots/${createdSpot?.id}`)
+        }
     }
 
     return (

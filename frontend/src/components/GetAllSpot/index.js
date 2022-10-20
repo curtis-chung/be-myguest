@@ -7,13 +7,13 @@ import "./GetAllSpot.css"
 
 const GetAllSpot = () => {
     const dispatch = useDispatch();
-    let spotsArr;
+    const [isLoaded, setIsLoaded] = useState(false);
 
     const spotsObj = useSelector((state) => {
-        return state.spot // empty {}
+        return state.spot.allSpot // {}
     })
 
-    spotsArr = Object.values(spotsObj) // empty []
+    const spotsArr = Object.values(spotsObj) // []
 
     // console.log(allSpots)
     // console.log(spotsArr)
@@ -21,15 +21,16 @@ const GetAllSpot = () => {
 
     useEffect(() => {
         dispatch(spotActions.getAllSpot())
-    }, [dispatch]);
+            .then(setIsLoaded(true))
+    }, []);
 
     return (
         <>
-            {spotsArr && (
+            {isLoaded && (
                 <div className="get-all-spot-container">
                     <div className="get-all-spot-body">
-                        {spotsArr.map((spot) => (
-                            <SpotPreview spot={spot} />
+                        {spotsArr.map((spot, i) => (
+                            <SpotPreview key={spot.id} spot={spot} />
                         ))}
                     </div>
                 </div>
