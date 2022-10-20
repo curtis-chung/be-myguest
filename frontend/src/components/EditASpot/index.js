@@ -12,7 +12,7 @@ const EditSpotForm = ({ clickedX }) => {
         return state?.spot?.oneSpot
     })
 
-    console.log(spotById)
+    // console.log(spotById)
 
     const [address, setAddress] = useState(spotById?.address);
     const [city, setCity] = useState(spotById?.city);
@@ -40,6 +40,8 @@ const EditSpotForm = ({ clickedX }) => {
         }
 
         const editSpot = await dispatch(spotActions.editSpot(spot, spotId))
+            .then(dispatch(spotActions.getOneSpot(spotId)))
+            .then(clickedX)
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
