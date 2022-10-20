@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
-import CreateSpotForm from "./index"
+import EditSpotForm from "./index"
 
-function CreateSpotFormModal() {
+function EditSpotFormModal() {
     const [showModal, setShowModal] = useState(false);
 
     const clickedX = () => {
@@ -14,11 +14,11 @@ function CreateSpotFormModal() {
             <button onClick={() => setShowModal(true)}></button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <CreateSpotForm clickedX={clickedX} />
+                    <EditSpotForm clickedX={clickedX} />
                 </Modal>
             )}
         </>
     );
 }
 
-export default CreateSpotFormModal;
+export default EditSpotFormModal;
