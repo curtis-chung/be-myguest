@@ -4,21 +4,23 @@ import "./SpotPreview.css"
 const SpotPreview = ({ spot }) => {
     // console.log(spot)
     return (
-        <div className="spot-preview-container">
-            <Link className="link-container" to={`/spots/${spot.id}`}>
-                <div className="spot-image-container">
-                    <img className="spot-image" src={spot.previewImage} />
+        <div className="spot-preview-container-1">
+            <Link className="spot-preview-link-container" to={`/spots/${spot.id}`}>
+                <div className="spot-preview-container-2">
+                    <img className="spot-preview" src={spot.previewImage} />
                 </div>
-                <div className="spot-info-container">
-                    <div className="spot-info-top">
-                        <div className="spot-location">{spot.city}, {spot.state}</div>
-                        <div className="spot-rating"><i class="fa-solid fa-star"></i> {spot.avgRating}
+                <div className="spot-preview-container-3">
+                    <div className="spot-preview-top">
+                        <div className="spot-preview-spot-location" style={{ fontSize: "16px", fontWeight: "600" }}>{spot.city}, {spot.state}</div>
+                        <div className="spot-preview-spot-rating"><i class="fa-solid fa-star"></i> {spot.avgRating}
                         </div>
                     </div>
-                    <div className="spot-info-bottom">
-                        <div className="spot-name">{spot.name}</div>
-                        <div className="spot-price">${spot.price} night</div> </div>
-
+                    <div className="spot-preview-middle">
+                        <div className="spot-preview-spot-name" style={{ fontSize: "16px", fontWeight: "200" }}>{spot.name}</div>
+                    </div>
+                    <div className="spot-preview-bottom">
+                        <div className="spot-preview-spot-price" style={{ fontSize: "16px", fontWeight: "600" }}>${spot.price} night</div>
+                    </div>
                 </div>
             </Link>
         </div>

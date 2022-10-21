@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import * as spotActions from "../../store/spot"
-import "./GetOneSpot.css"
+import * as spotActions from "../../store/spot";
+import * as reviewActions from "../../store/review";
+import "./GetOneSpot.css";
 import { Modal } from '../../context/Modal';
 import EditSpotForm from "../EditASpot";
-// import DeleteSpot from "../DeleteASpot";
+import CreateReviewForm from "../CreateReview";
 
 const GetOneSpot = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
+    const sessionUser = useSelector(state => state.session.user);
+    // console.log("sessionUser", sessionUser)
+
+    const [isLoaded, setIsLoaded] = useState(false);
 
     let spotImageArr;
     let spotImages = []
@@ -30,15 +35,38 @@ const GetOneSpot = () => {
     }
 
     // console.log(spotImageArr)
-    // console.log(spotById)
+    // console.log("spotById", spotById)
     // console.log(spotImages)
 
+    // Edit Spot
     const [editSpotModal, setEditSpotModal] = useState(false);
-
     const editSpotX = () => {
         setEditSpotModal(false)
     }
 
+    // Reviews
+    const [existingReviews, setExistingReviews] = useState(false);
+    const reviewsBySpotId = useSelector((state) => {
+        return Object.values(state?.review?.currentSpotReviews)
+    })
+    let reviewsArr;
+
+    if (existingReviews) {
+        reviewsArr = reviewsBySpotId
+    } else {
+        reviewsArr = "No reviews yet"
+    }
+
+    console.log("checking review dispatcher", reviewsArr)
+
+    // Create Review
+    const [createReviewModal, setCreateReviewModal] = useState(false);
+
+    const createReviewX = () => {
+        setCreateReviewModal(false)
+    }
+
+    // Delete spots
     const handleClick = async (e) => {
         e.preventDefault();
 
@@ -47,31 +75,49 @@ const GetOneSpot = () => {
             .then(history.push(`/`))
     }
 
+    // Checks
+    // const [isSpotOwner, setIsSpotOwner] = useState(false)
+
+    // if (sessionUser?.id === spotById?.ownerId) {
+    //     setIsSpotOwner(true)
+    // }
+
     useEffect(() => {
         dispatch(spotActions.getOneSpot(spotId))
+            .then(() => dispatch(reviewActions.getCurrentSpotReviews(spotId)))
+            .then(setIsLoaded(true))
     }, [dispatch]);
-
-    // if (!Object.values(spotById).length) return null
 
     return (
         <>
-            {spotImageArr && spotById && spotImages && (
+            {isLoaded && (
                 <div className="get-one-spot-container">
                     <div className="get-one-spot-container-body">
                         <div className="get-one-spot-body-top">
-                            <div className="spot-name">
-                                <div>{spotById?.name}</div>
+                            <div className="get-one-spot-body-top-left">
+                                <div className="spot-name">
+                                    <div>{spotById?.name}</div>
+                                </div>
+                                <div className="ratings-reviews-address">
+                                    <div className="spot-ratings">
+                                        <div><i class="fa-solid fa-star"></i>{spotById?.avgRating}</div>
+                                    </div>
+                                    <div className="spot-reviews">
+                                        <div>Reviews</div>
+                                    </div>
+                                    <div className="spot-address">
+                                        <div>{spotById?.city}, {spotById?.state}, {spotById?.country}</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="ratings-reviews-address">
-                                <div className="spot-ratings">
-                                    <div><i class="fa-solid fa-star"></i>{spotById?.avgRating}</div>
-                                </div>
-                                <div className="spot-reviews">
-                                    <div>Reviews</div>
-                                </div>
-                                <div className="spot-address">
-                                    <div>{spotById?.city}, {spotById?.state}, {spotById?.country}</div>
-                                </div>
+                            <div className="get-one-spot-body-top-right">
+                                <button onClick={() => setEditSpotModal(true)} className="edit-delete-spot-button">Edit</button>
+                                {editSpotModal &&
+                                    <Modal Modal onClose={() => setEditSpotModal(false)}>
+                                        <EditSpotForm clickedX={editSpotX} />
+                                    </Modal>
+                                }
+                                <button onClick={handleClick} type="submit" className="edit-delete-spot-button">Delete</button>
                             </div>
                         </div>
 
@@ -108,23 +154,20 @@ const GetOneSpot = () => {
                         <div className="spot-images-container-right-middle"></div>
 
                         <div className="get-one-spot-body-bottom">
-                            <div>Entire home hosted by {spotById?.Owner?.firstName}</div>
+                            <div className="spot-host">Entire home hosted by {spotById?.Owner?.firstName}</div>
+                            <div className='spot-line'></div>
                             <div>{spotById?.description}</div>
+                            <div className='spot-line'></div>
                         </div>
-
-                        <div className="edit-spot-button-div">
-                            <button onClick={() => setEditSpotModal(true)} className="become-a-host-button">
-                                Edit
+                        <div className="create-review-button-div">
+                            <button onClick={() => setCreateReviewModal(true)} className="create-a-review-button">
+                                Create Review
                             </button>
-                            {editSpotModal &&
-                                <Modal Modal onClose={() => setEditSpotModal(false)}>
-                                    <EditSpotForm clickedX={editSpotX} />
+                            {createReviewModal &&
+                                <Modal Modal onClose={() => setCreateReviewModal(false)}>
+                                    <CreateReviewForm clickedX={createReviewX} />
                                 </Modal>
                             }
-                        </div>
-
-                        <div>
-                            <button onClick={handleClick} type="submit" className="delete-spot-button">Delete</button>
                         </div>
                     </div>
                 </div>

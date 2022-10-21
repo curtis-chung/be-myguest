@@ -1,4 +1,4 @@
-.create-spot-container {
+.create-review-container {
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -13,7 +13,7 @@
     align-items: center;
 }
 
-.create-spot-container-header {
+.create-review-container-header {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,7 +46,7 @@
     background-color: rgb(243, 243, 243);
 }
 
-.create-spot-for-bemyguest {
+.create-review-for-bemyguest {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,15 +54,15 @@
     font-size: 16;
 }
 
-.create-spot-container-body {
+.create-review-container-body {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 568px;
-    height: 650px;
+    height: 618px;
 }
 
-.create-spot-form-box {
+.create-review-form-box {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,16 +70,15 @@
     height: 562px;
 }
 
-.create-spot-container-body-content {
+.create-review-container-body-content {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     position: relative;
     box-sizing: border-box;
     width: 520px;
-    height: 630px;
-    /* border: 1px solid black; */
+    height: 562px;
 }
 
 .welcome {
@@ -90,7 +89,7 @@
     font-size: 22px;
 }
 
-.create-spot-inputs {
+.create-review-inputs {
     height: fit-content;
     width: 520px;
     margin-top: 28px;
@@ -103,7 +102,7 @@
     box-sizing: border-box;
 }
 
-.create-spot-input-fields {
+.create-review-input-fields {
     box-sizing: border-box;
     border: 0px solid transparent;
     border-radius: 8px;
@@ -111,16 +110,21 @@
     height: 55.5px;
 }
 
-.create-spot-text-area-fields {
+.text-area-div {
+    width: 520px;
+    height: 75px;
+}
+
+.create-review-text-area-fields {
     box-sizing: border-box;
     border: 0px solid transparent;
     border-radius: 8px;
     width: 100%;
-    height: 55px;
+    height: 100%;
     resize: none;
 }
 
-.create-spot-button {
+.create-review-button {
     box-sizing: border-box;
     width: 520px;
     height: 50px;
@@ -133,11 +137,11 @@
     font-weight: bold;
 }
 
-.create-spot-button-div {
+.create-review-button-div {
     margin-top: 16px;
 }
 
-.create-spot-error {
+.create-review-error {
     color: red;
     font-size: 12px;
     font-weight: 400px;
