@@ -17,7 +17,7 @@
 
 @media (max-width: 1024px) {
     .get-one-spot-container-body {
-        width: 100%;
+        width: 880px;
         margin: 0;
     }
 }
@@ -30,11 +30,11 @@
 }
 
 .get-one-spot-body-top-right {
-    width: 20%;
+    width: 15%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     box-sizing: border-box;
 }
 
@@ -56,7 +56,7 @@
 }
 
 .get-one-spot-body-top-left {
-    width: 80%;
+    width: 85%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -99,6 +99,7 @@
     box-sizing: border-box;
     height: 560px;
     width: 100%;
+    border-top-right-radius: 20px;
 }
 
 .spot-images-container-left {
@@ -115,6 +116,8 @@
     width: 50%;
     display: flex;
     flex-direction: column;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .spot-images-container-right-top {
@@ -122,6 +125,7 @@
     height: 50%;
     display: flex;
     box-sizing: border-box;
+    border-top-right-radius: 20px;
 }
 
 .spot-images-container-right-bottom {
@@ -129,6 +133,7 @@
     height: 50%;
     display: flex;
     box-sizing: border-box;
+    border-bottom-right-radius: 20px;
 }
 
 .spot-images-container-right-top-left {
@@ -151,6 +156,7 @@
 .spot-images-container-right-bottom-left {
     width: 50%;
     border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 .spot-images-container-right-middle {
@@ -180,7 +186,7 @@
 }
 
 .get-one-spot-body-bottom {
-    margin-top: 20px;
+    margin-top: 25px;
     display: flex;
     flex-direction: column;
 }
@@ -203,8 +209,6 @@
 }
 
 .spot-line {
-    margin-top: 25px;
-    margin-bottom: 25px;
     border-bottom: 1px solid lightgray;
     box-sizing: border-box;
 }
@@ -212,4 +216,29 @@
 .spot-host {
     font-size: 22px;
     font-weight: 600px;
+    margin-bottom: 25px;
+}
+
+.spot-description {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.spot-review-container {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin-top: 25px;
+}
+
+.spot-review-container-card {
+    display: flex;
+    height: fit-content;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+    flex-wrap: wrap;
 }

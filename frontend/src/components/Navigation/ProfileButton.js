@@ -60,13 +60,12 @@ function ProfileButton({ user }) {
                 <div className="profile-dropdown-container">
                     <div className="profile-dropdown-contents">
                         <div className="profile-dropdown-personal-info">
-                            <div>{user.username}</div>
-                            <div>{user.email}</div>
+                            Welcome, <div>{user.username}</div>
                         </div>
 
                         <div className='line'></div>
 
-                        <div className="profile-dropdown-content">
+                        {/* <div className="profile-dropdown-content">
                             Manage Trips
                         </div>
 
@@ -76,7 +75,7 @@ function ProfileButton({ user }) {
                             Manage Reviews
                         </div>
 
-                        <div className='line'></div>
+                        <div className='line'></div> */}
 
                         <div onClick={logout} className="profile-dropdown-content">Log Out</div>
                     </div>

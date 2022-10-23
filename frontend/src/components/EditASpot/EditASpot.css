@@ -59,7 +59,9 @@
     justify-content: center;
     align-items: center;
     width: 568px;
-    height: 618px;
+    height: fit-content;
+    margin-top: 28px;
+    margin-bottom: 28px;
 }
 
 .edit-spot-form-box {
@@ -67,7 +69,7 @@
     justify-content: center;
     align-items: center;
     width: 520px;
-    height: 562px;
+    /* height: 562px; */
 }
 
 .edit-spot-container-body-content {
@@ -78,7 +80,7 @@
     position: relative;
     box-sizing: border-box;
     width: 520px;
-    height: 562px;
+    /* height: 562px; */
 }
 
 .welcome {
@@ -110,19 +112,19 @@
     height: 55.5px;
 }
 
-.text-area-div {
+/* .text-area-div {
     width: 520px;
-    height: 75px;
-}
+    height: 55.5px;
+} */
 
-.edit-spot-text-area-fields {
+/* .edit-spot-text-area-fields {
     box-sizing: border-box;
     border: 0px solid transparent;
     border-radius: 8px;
     width: 100%;
     height: 100%;
     resize: none;
-}
+} */
 
 .edit-spot-button {
     box-sizing: border-box;
@@ -138,11 +140,16 @@
 }
 
 .edit-spot-button-div {
-    margin-top: 16px;
+    margin-top: 28px;
 }
 
 .edit-spot-error {
     color: red;
     font-size: 12px;
     font-weight: 400px;
+}
+
+.edit-spot-label {
+    font-size: 10px;
+    font-weight: 300;
 }

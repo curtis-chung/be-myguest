@@ -2,12 +2,19 @@ import { csrfFetch } from './csrf';
 
 // Actions
 const GET_CURRENT_SPOT_REVIEWS = "reviews/getCurrentSpotReviews";
+const CLEAN_UP_REVIEWS = "reviews/cleanUpReviews";
 
 // Action Creators
 const getCurrentSpotReviewAction = (list) => ({
     type: GET_CURRENT_SPOT_REVIEWS,
     list
 })
+
+export const cleanUpReviews = () => {
+    return {
+        type: CLEAN_UP_REVIEWS
+    }
+}
 
 // Thunks
 export const createReview = (review, spotId) => async (dispatch) => {
@@ -62,6 +69,11 @@ const reviewReducer = (state = initialState, action) => {
             })
             newState.currentSpotReviews = allReviewsList
             return newState
+
+        case CLEAN_UP_REVIEWS:
+            newState.currentSpotReviews = {}
+            return newState
+
         default:
             return state
     }

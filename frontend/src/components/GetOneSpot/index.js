@@ -7,13 +7,14 @@ import "./GetOneSpot.css";
 import { Modal } from '../../context/Modal';
 import EditSpotForm from "../EditASpot";
 import CreateReviewForm from "../CreateReview";
+import ReviewPreview from "../ReviewPreview";
 
 const GetOneSpot = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
-    // console.log("sessionUser", sessionUser)
+    // console.log("sessionUser", sessionUser) // {}
 
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -23,6 +24,14 @@ const GetOneSpot = () => {
     const spotById = useSelector((state) => {
         return state?.spot?.oneSpot // {}
     })
+
+    let spotRating;
+
+    if (!spotById.avgStarRating) {
+        spotRating = "New"
+    } else {
+        spotRating = `${spotById.avgStarRating}`
+    }
 
     spotImageArr = spotById?.SpotImages
 
@@ -57,13 +66,21 @@ const GetOneSpot = () => {
         reviewsArr = "No reviews yet"
     }
 
-    console.log("checking review dispatcher", reviewsArr)
+    //console.log("checking review dispatcher", reviewsArr)
 
     // Create Review
     const [createReviewModal, setCreateReviewModal] = useState(false);
 
     const createReviewX = () => {
         setCreateReviewModal(false)
+    }
+
+    // # of reviews
+    let numReviews;
+    if (!reviewsArr) {
+        numReviews = "No reviews yet"
+    } else {
+        numReviews = `${reviewsArr.length} reviews`
     }
 
     // Delete spots
@@ -75,17 +92,31 @@ const GetOneSpot = () => {
             .then(history.push(`/`))
     }
 
-    // Checks
-    // const [isSpotOwner, setIsSpotOwner] = useState(false)
 
-    // if (sessionUser?.id === spotById?.ownerId) {
-    //     setIsSpotOwner(true)
-    // }
+
+    // Checks
+
+    //is spot owner
+    let isSpotOwner = false
+
+    if (sessionUser?.id === spotById?.ownerId) {
+        isSpotOwner = true
+    }
+
+    //is logged in
+    let isLoggedIn = false
+
+    if (sessionUser) {
+        isLoggedIn = true
+    }
 
     useEffect(() => {
         dispatch(spotActions.getOneSpot(spotId))
             .then(() => dispatch(reviewActions.getCurrentSpotReviews(spotId)))
+            .then(setExistingReviews(true))
             .then(setIsLoaded(true))
+        return () => dispatch(spotActions.cleanUpSpot())
+        // .then(() => dispatch(reviewActions.cleanUpReviews(spotId)))
     }, [dispatch]);
 
     return (
@@ -100,17 +131,19 @@ const GetOneSpot = () => {
                                 </div>
                                 <div className="ratings-reviews-address">
                                     <div className="spot-ratings">
-                                        <div><i class="fa-solid fa-star"></i>{spotById?.avgRating}</div>
+                                        <div><i class="fa-solid fa-star"></i>{spotRating}</div>
                                     </div>
+                                    {/* <div>·</div> */}
                                     <div className="spot-reviews">
-                                        <div>Reviews</div>
+                                        <div>{numReviews}</div>
                                     </div>
+                                    {/* <div>·</div> */}
                                     <div className="spot-address">
                                         <div>{spotById?.city}, {spotById?.state}, {spotById?.country}</div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="get-one-spot-body-top-right">
+                            {isSpotOwner && (<div className="get-one-spot-body-top-right">
                                 <button onClick={() => setEditSpotModal(true)} className="edit-delete-spot-button">Edit</button>
                                 {editSpotModal &&
                                     <Modal Modal onClose={() => setEditSpotModal(false)}>
@@ -118,14 +151,16 @@ const GetOneSpot = () => {
                                     </Modal>
                                 }
                                 <button onClick={handleClick} type="submit" className="edit-delete-spot-button">Delete</button>
-                            </div>
+                            </div>)}
                         </div>
 
                         <div className="get-one-spot-body-middle">
                             <div className="spot-images-container-left display-image">
                                 <img className="display-images large-image" src={spotImages[0]} />
                             </div>
+
                             <div className="spot-images-container-middle"></div>
+
                             <div className="spot-images-container-right">
                                 <div className="spot-images-container-right-top">
                                     <div className="spot-images-container-right-top-left display-image">
@@ -156,19 +191,51 @@ const GetOneSpot = () => {
                         <div className="get-one-spot-body-bottom">
                             <div className="spot-host">Entire home hosted by {spotById?.Owner?.firstName}</div>
                             <div className='spot-line'></div>
-                            <div>{spotById?.description}</div>
+                            <div className="spot-description">{spotById?.description}</div>
                             <div className='spot-line'></div>
+                            <div className="spot-review-container">
+                                {isLoggedIn && (<div>
+                                    <button onClick={() => setCreateReviewModal(true)} className="create-a-review-button">
+                                        Create Review
+                                    </button>
+                                    {createReviewModal &&
+                                        <Modal Modal onClose={() => setCreateReviewModal(false)}>
+                                            <CreateReviewForm clickedX={createReviewX} />
+                                        </Modal>
+                                    }
+                                </div>)}
+                                {/* <div>
+                                    <button onClick={() => setCreateReviewModal(true)} className="create-a-review-button">
+                                        Create Review
+                                    </button>
+                                    {createReviewModal &&
+                                        <Modal Modal onClose={() => setCreateReviewModal(false)}>
+                                            <CreateReviewForm clickedX={createReviewX} />
+                                        </Modal>
+                                    }
+                                </div> */}
+                                <div className="spot-review-container-card">
+                                    {reviewsArr.map((review) => (
+                                        <ReviewPreview key={review.id} review={review} spotId={spotId} sessionUser={sessionUser} />
+                                    ))}
+                                </div>
+                            </div>
+                            <div className='spot-line'></div>
+                            {/* <div className="create-review-button-div">
+                                <button onClick={() => setCreateReviewModal(true)} className="create-a-review-button">
+                                    Create Review
+                                </button>
+                                {createReviewModal &&
+                                    <Modal Modal onClose={() => setCreateReviewModal(false)}>
+                                        <CreateReviewForm clickedX={createReviewX} />
+                                    </Modal>
+                                }
+                            </div> */}
                         </div>
-                        <div className="create-review-button-div">
-                            <button onClick={() => setCreateReviewModal(true)} className="create-a-review-button">
-                                Create Review
-                            </button>
-                            {createReviewModal &&
-                                <Modal Modal onClose={() => setCreateReviewModal(false)}>
-                                    <CreateReviewForm clickedX={createReviewX} />
-                                </Modal>
-                            }
-                        </div>
+
+
+
+
                     </div>
                 </div>
             )}

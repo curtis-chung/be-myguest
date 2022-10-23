@@ -1,0 +1,53 @@
+.review-preview-container {
+    /* border: 1px solid red; */
+    max-height: 150px;
+    height: fit-content;
+    width: 420px;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    overflow: hidden;
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+.review-preview-container-top {
+    /* border: 1px solid blue; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.review-preview-container-top-right {
+    display: flex;
+    box-sizing: border-box;
+}
+
+.review-preview-container-top-left {
+    display: flex;
+    box-sizing: border-box;
+}
+
+.review-avatar {
+    /* border: 1px solid green; */
+    font-size: 25px;
+    margin-right: 10px;
+}
+
+.review-user-name {
+    /* border: 1px solid pink; */
+    font-weight: 550;
+    font-size: 14px;
+}
+
+.review-preview-container-bottom {
+    /* border: 1px solid orange; */
+    overflow: hidden;
+}
+
+.review-user-review {
+    /* border: 1px solid yellow; */
+    margin-top: 10px;
+    font-size: 14px;
+}

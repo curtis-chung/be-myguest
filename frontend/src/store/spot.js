@@ -5,8 +5,9 @@ import { csrfFetch } from './csrf';
 const GET_ALL_SPOT = "spots/getAllSpot";
 const GET_ONE_SPOT = "spots/getOneSpot";
 const EDIT_SPOT = "spots/editSpot";
-const CREATE_SPOT_IMAGE = "spots/spotImage"
+// const CREATE_SPOT_IMAGE = "spots/spotImage"
 // const DELETE_SPOT = "spots/deleteSpot";
+const CLEAN_UP_SPOT = "spots/cleanUpSpot"
 
 // Action Creators
 // const createSpotAction = (spot) => ({
@@ -33,6 +34,12 @@ const editSpotAction = (spot) => ({
 //     type: DELETE_SPOT,
 //     id
 // })
+
+export const cleanUpSpot = () => {
+    return {
+        type: CLEAN_UP_SPOT
+    }
+}
 
 // Thunks
 export const createSpotImage = (imageObj, spotId) => async (dispatch) => {
@@ -142,6 +149,10 @@ const spotReducer = (state = initialState, action) => {
 
         case EDIT_SPOT:
             newState.oneSpot[action.spot.id] = action.spot
+            return newState
+
+        case CLEAN_UP_SPOT:
+            newState.oneSpot = {}
             return newState
 
         default:

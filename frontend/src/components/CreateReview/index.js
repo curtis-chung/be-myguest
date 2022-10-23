@@ -9,7 +9,7 @@ const CreateReviewForm = ({ clickedX }) => {
     const history = useHistory();
     let { spotId } = useParams();
     spotId = parseInt(spotId)
-    console.log(spotId)
+    //console.log(spotId)
     const sessionUser = useSelector((state) => state.session.user);
 
     const [review, setReview] = useState("");
@@ -33,8 +33,9 @@ const CreateReviewForm = ({ clickedX }) => {
             });
 
         if (createdReview) {
-            console.log(createdReview)
+            //console.log(createdReview)
             clickedX()
+            dispatch(reviewActions.getCurrentSpotReviews(spotId))
             // await dispatch(reviewActions.createReview(createdReview, spotId))
             history.push(`/spots/${spotId}`)
         }
@@ -52,31 +53,37 @@ const CreateReviewForm = ({ clickedX }) => {
                         <div className="welcome">Welcome to Be-myguest</div>
                         <div className='create-review-inputs'>
                             <div className="text-area-div">
-                                <textarea
-                                    type="text"
-                                    value={review}
-                                    onChange={(e) => setReview(e.target.value)}
-                                    required
-                                    placeholder="Review"
-                                    className="create-review-text-area-fields"
-                                />
+                                <label className="create-review-label"> Review
+                                    <input
+                                        type="text"
+                                        value={review}
+                                        onChange={(e) => setReview(e.target.value)}
+                                        // required
+                                        placeholder="Review"
+                                        className="create-review-input-fields"
+                                    />
+                                </label>
                             </div>
                             <div className='line'></div>
                             <div>
-                                <label>
+                                <label className="create-review-label"> Rating
                                     <input
                                         type="number"
                                         value={stars}
                                         onChange={(e) => setStars(e.target.value)}
-                                        required
+                                        // required
                                         placeholder="# of stars"
-                                        min="1"
+                                        // min="1"
+                                        // max="5"
                                         className="create-review-input-fields"
                                     />
                                 </label>
                             </div>
                             <div className='line'></div>
                         </div>
+                        <ul className="create-spot-error">
+                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                        </ul>
                         <div className="create-review-button-div">
                             <button type="submit" className="create-review-button">Create Review</button>
                         </div>
