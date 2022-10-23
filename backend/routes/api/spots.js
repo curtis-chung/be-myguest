@@ -63,7 +63,7 @@ function createPaginationObject(req, res, next) {
     next();
 }
 
-router.get("/", validateQueryParameters, createPaginationObject, async (req, res) => {
+router.get("/", createPaginationObject, async (req, res) => {
     page = parseInt(req.page)
     size = parseInt(req.size)
 
