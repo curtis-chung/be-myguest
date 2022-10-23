@@ -9,7 +9,7 @@ const GetAllSpot = () => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     const spotsObj = useSelector((state) => {
-        return state.spot.allSpot // {}
+        return state?.spot?.allSpot // {}
     })
 
     const spotsArr = Object.values(spotsObj) // []
@@ -28,7 +28,7 @@ const GetAllSpot = () => {
             {isLoaded && (
                 <div className="get-all-spot-container">
                     {spotsArr?.map((spot) => (
-                        <SpotCard key={spot.id} spot={spot} />
+                        <SpotCard key={spot?.id} spot={spot} />
                     ))}
                 </div>
             )}
