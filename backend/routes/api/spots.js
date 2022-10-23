@@ -4,7 +4,7 @@ const { Booking, Review, ReviewImage, Spot, SpotImage, User, Sequelize } = requi
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { Op } = require('sequelize')
-
+const router = express.Router();
 
 const validateSpot = [
     check('address')
