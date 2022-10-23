@@ -4,8 +4,7 @@ const { Booking, Review, ReviewImage, Spot, SpotImage, User, Sequelize } = requi
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { Op } = require('sequelize')
-const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
+
 
 const validateSpot = [
     check('address')
@@ -35,7 +34,7 @@ const validateSpot = [
 
 const validateReview = [
     check('review')
-        .isLength({ min: 1, max: 244 })
+        .isLength({ min: 1, max: 255 })
         .withMessage("Review must be between 1 and 255 characters"),
     check('stars')
         .isFloat({ min: 1, max: 5 })
