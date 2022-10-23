@@ -12,7 +12,11 @@ const GetAllSpot = () => {
         return state?.spot?.allSpot // {}
     })
 
-    const spotsArr = Object.values(spotsObj) // []
+    let spotsArr;
+    if (spotsObj) {
+        spotsArr = Object.values(spotsObj)
+        setIsLoaded(true)
+    }
 
     // console.log(allSpots)
     // console.log(spotsArr)
@@ -20,7 +24,6 @@ const GetAllSpot = () => {
 
     useEffect(() => {
         dispatch(spotActions.getAllSpot())
-            .then(setIsLoaded(true))
     }, []);
 
     return (
@@ -28,7 +31,7 @@ const GetAllSpot = () => {
             {isLoaded && (
                 <div className="get-all-spot-container">
                     {spotsArr?.map((spot) => (
-                        <SpotCard key={spot?.id} spot={spot} />
+                        <SpotCard key={spot.id} spot={spot} />
                     ))}
                 </div>
             )}
