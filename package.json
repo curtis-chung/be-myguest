@@ -18,13 +18,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/curtis-chung/API-project.git"
+    "url": "git+https://github.com/curtis-chung/Airbnb-project.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/curtis-chung/API-project/issues"
+    "url": "https://github.com/curtis-chung/Airbnb-project/issues"
   },
-  "homepage": "https://github.com/curtis-chung/API-project#readme"
+  "homepage": "https://github.com/curtis-chung/Airbnb-project#readme"
 }
