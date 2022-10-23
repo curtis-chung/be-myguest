@@ -3,6 +3,45 @@ const { requireAuth } = require("../../utils/auth");
 const { Booking, Review, ReviewImage, Spot, SpotImage, User, Sequelize } = require('../../db/models')
 const router = express.Router();
 const { Op } = require('sequelize')
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
+
+const validateSpot = [
+    check('address')
+        .isLength({ min: 1, max: 255 })
+        .withMessage("Address must be between 1 and 255 characters"),
+    check('city')
+        .isLength({ min: 1, max: 255 })
+        .withMessage("City must be between 1 and 255 characters"),
+    check('state')
+        .isLength({ min: 1, max: 255 })
+        .withMessage("State must be between 1 and 255 characters"),
+    check('country')
+        .isLength({ min: 1, max: 255 })
+        .withMessage("Country must be between 1 and 255 characters"),
+    check('name')
+        .isLength({ min: 1, max: 255 })
+        .withMessage("Name must be between 1 and 255 characters"),
+    check('description')
+        .isLength({ min: 1, max: 255 })
+        .withMessage("Description must be between 1 and 255 characters"),
+    check('price')
+        .isFloat({ min: 1 })
+        .withMessage("Price must be at least $1"),
+
+    handleValidationErrors
+];
+
+const validateReview = [
+    check('review')
+        .isLength({ min: 1, max: 244 })
+        .withMessage("Review must be between 1 and 255 characters"),
+    check('stars')
+        .isFloat({ min: 1, max: 5 })
+        .withMessage("Rating must be between 1 and 5"),
+
+    handleValidationErrors
+];
 
 // Get all spots
 router.get("/", async (req, res) => {
@@ -67,7 +106,7 @@ router.get("/", async (req, res) => {
 })
 
 // create a spot
-router.post("/", requireAuth, async (req, res) => {
+router.post("/", requireAuth, validateSpot, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const ownerId = req.user.id
 
@@ -251,7 +290,7 @@ router.get("/:spotId", async (req, res) => {
 })
 
 // edit a spot
-router.put("/:spotId", requireAuth, async (req, res) => {
+router.put("/:spotId", requireAuth, validateSpot, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const spotId = req.params.spotId;
     const ownerId = req.user.id;
@@ -295,7 +334,7 @@ router.put("/:spotId", requireAuth, async (req, res) => {
 })
 
 // Create a Review for a Spot based on the Spot's id
-router.post("/:spotId/reviews", requireAuth, async (req, res) => {
+router.post("/:spotId/reviews", requireAuth, validateReview, async (req, res) => {
     const { review, stars } = req.body;
     const { spotId } = req.params;
     const userId = req.user.id;
@@ -344,8 +383,18 @@ router.post("/:spotId/reviews", requireAuth, async (req, res) => {
 
 // Get all Reviews by a Spot's id
 router.get("/:spotId/reviews", async (req, res) => {
-    const userId = req.user.id;
+    // const userId = req.user.id;
     const { spotId } = req.params;
+
+    const spot = await Spot.findByPk(spotId)
+
+    if (!spot) {
+        res.status(404);
+        return res.json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    }
 
     const reviews = await Review.findAll({
         include: [
@@ -360,19 +409,10 @@ router.get("/:spotId/reviews", async (req, res) => {
         ],
         where: {
             [Op.and]: [
-                { spotId: spotId },
-                { userId: userId }
+                { spotId: spotId }
             ]
         }
     })
-
-    if (reviews.length === 0) {
-        res.status(404);
-        return res.json({
-            message: "Spot couldn't be found",
-            statusCode: 404
-        })
-    }
 
     let reviewList = []
 
@@ -458,7 +498,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
 
     for (let booking of existingBookings) {
 
-        console.log(booking)
+        //console.log(booking)
 
         // if start date is on or between existing dates
         if (startDate >= booking.startDate && startDate <= booking.endDate) {
