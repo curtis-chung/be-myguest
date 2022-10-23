@@ -6,8 +6,6 @@ const { Op } = require('sequelize');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const spot = require('../../db/models/spot');
-const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
 
 const validateReview = [
     check('review')
