@@ -4,39 +4,6 @@ const { Booking, Review, ReviewImage, Spot, SpotImage, User, Sequelize } = requi
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { Op } = require('sequelize')
-<<<<<<< HEAD
-const router = express.Router();
-
-const validateSpot = [
-    check('address')
-        .exists({ checkFalsy: true })
-        .withMessage('Street address is required'),
-    check('city')
-        .exists({ checkFalsy: true })
-        .withMessage('City is required'),
-    check('state')
-        .exists({ checkFalsy: true })
-        .withMessage('State is required'),
-    check('country')
-        .exists({ checkFalsy: true })
-        .withMessage('Country is required'),
-    check('lat')
-        .exists({ checkFalsy: true })
-        .withMessage('Latitude is not valid'),
-    check('lng')
-        .exists({ checkFalsy: true })
-        .withMessage('Longitude is not valid'),
-    check('name')
-        .exists({ checkFalsy: true })
-        .isLength({ max: 50 })
-        .withMessage('Name must be less than 50 characters'),
-    check('description')
-        .exists({ checkFalsy: true })
-        .withMessage('Description is required'),
-    check('price')
-        .exists({ checkFalsy: true })
-        .withMessage('Price per day is required'),
-=======
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
@@ -63,79 +30,17 @@ const validateSpot = [
         .isFloat({ min: 1 })
         .withMessage("Price must be at least $1"),
 
->>>>>>> dev
     handleValidationErrors
 ];
 
 const validateReview = [
     check('review')
-<<<<<<< HEAD
-        .exists({ checkFalsy: true })
-        .withMessage('Review text is required'),
-    check('stars')
-        .exists({ checkFalsy: true })
-        .isInt({ min: 1, max: 5 })
-        .withMessage('Stars must be an integer from 1 to 5'),
-    handleValidationErrors
-];
-
-const validateBooking = [
-    check('startDate')
-        .exists({ checkFalsy: true })
-        .withMessage('Start date is required')
-        .bail()
-        .isDate()
-        .withMessage('Must be in date format, YYYY-MM-DD'),
-    check('endDate')
-        .exists({ checkFalsy: true })
-        .withMessage('End Date is required')
-        .bail()
-        .isDate()
-        .withMessage('Must be in date format, YYYY-MM-DD'),
-    handleValidationErrors
-];
-
-const validateQueryParameters = [
-    check('page')
-        .isInt({ min: 1, max: 10 })
-        .optional()
-        .withMessage('Page must be greater than or equal to 1'),
-    check('size')
-        .isInt({ min: 1, max: 20 })
-        .optional()
-        .withMessage('Size must be greater than or equal to 1'),
-    check('minLat')
-        .isDecimal()
-        .optional()
-        .withMessage('Minimum latitude is invalid'),
-    check('maxLat')
-        .isDecimal()
-        .optional()
-        .withMessage('Maximum latitude is invalid'),
-    check('minLng')
-        .isDecimal()
-        .optional()
-        .withMessage('Minimum longitude is invalid'),
-    check('maxLng')
-        .isDecimal()
-        .optional()
-        .withMessage('Maximum longitude is invalid'),
-    check('minPrice')
-        .isDecimal({ min: 0 })
-        .optional()
-        .withMessage('Minimum price must be greater than or equal to 0'),
-    check('maxPrice')
-        .isDecimal({ min: 0 })
-        .optional()
-        .withMessage('Maximum price must be greater than or equal to 0'),
-=======
         .isLength({ min: 1, max: 244 })
         .withMessage("Review must be between 1 and 255 characters"),
     check('stars')
         .isFloat({ min: 1, max: 5 })
         .withMessage("Rating must be between 1 and 5"),
 
->>>>>>> dev
     handleValidationErrors
 ];
 
@@ -225,11 +130,7 @@ router.get("/", validateQueryParameters, createPaginationObject, async (req, res
 })
 
 // create a spot
-<<<<<<< HEAD
-router.post("/", [requireAuth, validateSpot], async (req, res) => {
-=======
 router.post("/", requireAuth, validateSpot, async (req, res) => {
->>>>>>> dev
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const ownerId = req.user.id
 
@@ -457,11 +358,7 @@ router.put("/:spotId", requireAuth, validateSpot, async (req, res) => {
 })
 
 // Create a Review for a Spot based on the Spot's id
-<<<<<<< HEAD
-router.post("/:spotId/reviews", [requireAuth, validateReview], async (req, res) => {
-=======
 router.post("/:spotId/reviews", requireAuth, validateReview, async (req, res) => {
->>>>>>> dev
     const { review, stars } = req.body;
     const spotId = parseInt(req.params.spotId);
     const userId = req.user.id;
