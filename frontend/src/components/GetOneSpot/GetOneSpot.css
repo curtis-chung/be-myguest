@@ -2,27 +2,71 @@
     display: flex;
     justify-content: center;
     box-sizing: border-box;
-    padding-top: 24px;
+    /* padding-top: 24px; */
 }
 
 .get-one-spot-container-body {
     width: 1120px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     flex-direction: column;
     box-sizing: border-box;
+    margin: 24px;
+}
+
+@media (max-width: 1024px) {
+    .get-one-spot-container-body {
+        width: 880px;
+        margin: 0;
+    }
 }
 
 .get-one-spot-body-top {
     display: flex;
     box-sizing: border-box;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
+}
+
+.get-one-spot-body-top-right {
+    width: 15%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.edit-delete-spot-button {
+    background-color: white;
+    height: 42px;
+    width: 75px;
+    font-size: 14px;
+    border: transparent solid 1px;
+    border-radius: 500px;
+    font-weight: 600px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.edit-delete-spot-button:hover {
+    border: 1px solid transparent;
+    background-color: rgb(243, 243, 243);
+}
+
+.get-one-spot-body-top-left {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .spot-name {
     font-size: 26px;
+    font-weight: 700px;
     margin-bottom: 4px;
 }
 
@@ -32,6 +76,7 @@
     flex-direction: row;
     align-items: center;
     font-size: 14px;
+    justify-content: center;
 }
 
 .spot-ratings {
@@ -53,7 +98,8 @@
     flex-direction: row;
     box-sizing: border-box;
     height: 560px;
-    width: 1120px;
+    width: 100%;
+    border-top-right-radius: 20px;
 }
 
 .spot-images-container-left {
@@ -70,6 +116,8 @@
     width: 50%;
     display: flex;
     flex-direction: column;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .spot-images-container-right-top {
@@ -77,6 +125,7 @@
     height: 50%;
     display: flex;
     box-sizing: border-box;
+    border-top-right-radius: 20px;
 }
 
 .spot-images-container-right-bottom {
@@ -84,6 +133,7 @@
     height: 50%;
     display: flex;
     box-sizing: border-box;
+    border-bottom-right-radius: 20px;
 }
 
 .spot-images-container-right-top-left {
@@ -106,15 +156,11 @@
 .spot-images-container-right-bottom-left {
     width: 50%;
     border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 .spot-images-container-right-middle {
     width: 7px
-}
-
-.get-one-spot-body-bottom {
-    margin-top: 100px;
-    border: 10px solid orange;
 }
 
 .display-images {
@@ -137,4 +183,62 @@
 
 .display-image {
     background-color: lightgrey;
+}
+
+.get-one-spot-body-bottom {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.create-a-review-button {
+    background-color: white;
+    height: 42px;
+    width: 150px;
+    font-size: 14px;
+    border: transparent solid 1px;
+    border-radius: 500px;
+    font-weight: 600px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.create-a-review-button:hover {
+    border: 1px solid transparent;
+    background-color: rgb(243, 243, 243);
+}
+
+.spot-line {
+    border-bottom: 1px solid lightgray;
+    box-sizing: border-box;
+}
+
+.spot-host {
+    font-size: 22px;
+    font-weight: 600px;
+    margin-bottom: 25px;
+}
+
+.spot-description {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.spot-review-container {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin-top: 25px;
+}
+
+.spot-review-container-card {
+    display: flex;
+    height: fit-content;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+    flex-wrap: wrap;
 }

@@ -1,5 +1,7 @@
-.get-all-spot-body {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+.get-all-spot-container {
+    display: grid;
+    grid-gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(314px, 1fr));
+    justify-items: center;
+    padding: 36px;
 }

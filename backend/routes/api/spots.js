@@ -4,6 +4,7 @@ const { Booking, Review, ReviewImage, Spot, SpotImage, User, Sequelize } = requi
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { Op } = require('sequelize')
+<<<<<<< HEAD
 const router = express.Router();
 
 const validateSpot = [
@@ -35,11 +36,40 @@ const validateSpot = [
     check('price')
         .exists({ checkFalsy: true })
         .withMessage('Price per day is required'),
+=======
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
+
+const validateSpot = [
+    check('address')
+        .isLength({ min: 1, max: 255 })
+        .withMessage("Address must be between 1 and 255 characters"),
+    check('city')
+        .isLength({ min: 1, max: 255 })
+        .withMessage("City must be between 1 and 255 characters"),
+    check('state')
+        .isLength({ min: 1, max: 255 })
+        .withMessage("State must be between 1 and 255 characters"),
+    check('country')
+        .isLength({ min: 1, max: 255 })
+        .withMessage("Country must be between 1 and 255 characters"),
+    check('name')
+        .isLength({ min: 1, max: 255 })
+        .withMessage("Name must be between 1 and 255 characters"),
+    check('description')
+        .isLength({ min: 1, max: 255 })
+        .withMessage("Description must be between 1 and 255 characters"),
+    check('price')
+        .isFloat({ min: 1 })
+        .withMessage("Price must be at least $1"),
+
+>>>>>>> dev
     handleValidationErrors
 ];
 
 const validateReview = [
     check('review')
+<<<<<<< HEAD
         .exists({ checkFalsy: true })
         .withMessage('Review text is required'),
     check('stars')
@@ -98,6 +128,14 @@ const validateQueryParameters = [
         .isDecimal({ min: 0 })
         .optional()
         .withMessage('Maximum price must be greater than or equal to 0'),
+=======
+        .isLength({ min: 1, max: 244 })
+        .withMessage("Review must be between 1 and 255 characters"),
+    check('stars')
+        .isFloat({ min: 1, max: 5 })
+        .withMessage("Rating must be between 1 and 5"),
+
+>>>>>>> dev
     handleValidationErrors
 ];
 
@@ -187,7 +225,11 @@ router.get("/", validateQueryParameters, createPaginationObject, async (req, res
 })
 
 // create a spot
+<<<<<<< HEAD
 router.post("/", [requireAuth, validateSpot], async (req, res) => {
+=======
+router.post("/", requireAuth, validateSpot, async (req, res) => {
+>>>>>>> dev
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const ownerId = req.user.id
 
@@ -371,7 +413,7 @@ router.get("/:spotId", async (req, res) => {
 })
 
 // edit a spot
-router.put("/:spotId", requireAuth, async (req, res) => {
+router.put("/:spotId", requireAuth, validateSpot, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const spotId = req.params.spotId;
     const ownerId = req.user.id;
@@ -415,7 +457,11 @@ router.put("/:spotId", requireAuth, async (req, res) => {
 })
 
 // Create a Review for a Spot based on the Spot's id
+<<<<<<< HEAD
 router.post("/:spotId/reviews", [requireAuth, validateReview], async (req, res) => {
+=======
+router.post("/:spotId/reviews", requireAuth, validateReview, async (req, res) => {
+>>>>>>> dev
     const { review, stars } = req.body;
     const spotId = parseInt(req.params.spotId);
     const userId = req.user.id;
@@ -464,8 +510,18 @@ router.post("/:spotId/reviews", [requireAuth, validateReview], async (req, res) 
 
 // Get all Reviews by a Spot's id
 router.get("/:spotId/reviews", async (req, res) => {
-    const userId = req.user.id;
+    // const userId = req.user.id;
     const { spotId } = req.params;
+
+    const spot = await Spot.findByPk(spotId)
+
+    if (!spot) {
+        res.status(404);
+        return res.json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    }
 
     const reviews = await Review.findAll({
         include: [
@@ -480,19 +536,10 @@ router.get("/:spotId/reviews", async (req, res) => {
         ],
         where: {
             [Op.and]: [
-                { spotId: spotId },
-                { userId: userId }
+                { spotId: spotId }
             ]
         }
     })
-
-    if (reviews.length === 0) {
-        res.status(404);
-        return res.json({
-            message: "Spot couldn't be found",
-            statusCode: 404
-        })
-    }
 
     let reviewList = []
 
