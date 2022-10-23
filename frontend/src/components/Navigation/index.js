@@ -43,8 +43,10 @@ function Navigation({ isLoaded }) {
         <nav className="navbar">
             <div className='navbar-left'>
                 <NavLink
-                    exact to="/">
+                    exact to="/" className="navbar-left-navlink">
+                    <div className="navbar-left-navlink-text bemy">beMy</div>
                     <img src={logo} className='logo' />
+                    <div className="navbar-left-navlink-text">uest</div>
                 </NavLink>
             </div>
 

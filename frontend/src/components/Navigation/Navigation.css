@@ -9,23 +9,44 @@
     padding: 0px 100px;
     border-bottom: 1px solid lightgray;
     position: fixed;
-    font-family: sans-serif;
     top: 0;
     left: 0;
 }
 
 .logo {
-    height: 64px;
-    width: 118px;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: flex-end;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+.navbar-left-navlink {
+    height: 50px;
+    width: 131px;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.navbar-left-navlink-text {
+    font-size: 20px;
+    font-weight: 700;
+    color: rgb(187, 56, 100);
+}
+
+.bemy {
+    margin-right: 5px;
 }
 
 .navbar-left {
-    border: 10px solid red;
     box-sizing: border-box;
     align-items: center;
     justify-content: center;
     display: flex;
-    height: 80px;
 }
 
 .navbar-right {

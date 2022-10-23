@@ -28,7 +28,7 @@ function LoginForm({ clickedX }) {
 
     const loginDemoUser = (e) => {
         e.preventDefault();
-        return dispatch(sessionActions.login({ credential: `john.smith@gmail.com`, password: "secret password" }))
+        return dispatch(sessionActions.login({ credential: `demo@user.io`, password: "password" }))
             .then(clickedX)
     }
 

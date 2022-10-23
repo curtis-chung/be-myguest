@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import * as spotActions from "../../store/spot"
-import SpotPreview from "../SpotPreview";
+import SpotCard from "../SpotCard";
 import "./GetAllSpot.css"
 
 const GetAllSpot = () => {
@@ -28,11 +27,9 @@ const GetAllSpot = () => {
         <>
             {isLoaded && (
                 <div className="get-all-spot-container">
-                    <div className="get-all-spot-body">
-                        {spotsArr.map((spot, i) => (
-                            <SpotPreview key={spot.id} spot={spot} />
-                        ))}
-                    </div>
+                    {spotsArr?.map((spot) => (
+                        <SpotCard key={spot.id} spot={spot} />
+                    ))}
                 </div>
             )}
         </>

@@ -1,17 +1,19 @@
 import { csrfFetch } from './csrf';
 
 // Actions
-const CREATE_SPOT = "spots/createSpot";
+// const CREATE_SPOT = "spots/createSpot";
 const GET_ALL_SPOT = "spots/getAllSpot";
 const GET_ONE_SPOT = "spots/getOneSpot";
 const EDIT_SPOT = "spots/editSpot";
-const DELETE_SPOT = "spots/deleteSpot";
+// const CREATE_SPOT_IMAGE = "spots/spotImage"
+// const DELETE_SPOT = "spots/deleteSpot";
+const CLEAN_UP_SPOT = "spots/cleanUpSpot"
 
 // Action Creators
-const createSpotAction = (spot) => ({
-    type: CREATE_SPOT,
-    spot
-})
+// const createSpotAction = (spot) => ({
+//     type: CREATE_SPOT,
+//     spot
+// })
 
 const getAllSpotAction = (list) => ({
     type: GET_ALL_SPOT,
@@ -28,12 +30,32 @@ const editSpotAction = (spot) => ({
     spot
 })
 
-const deleteSpotAction = (id) => ({
-    type: DELETE_SPOT,
-    id
-})
+// const deleteSpotAction = (id) => ({
+//     type: DELETE_SPOT,
+//     id
+// })
+
+export const cleanUpSpot = () => {
+    return {
+        type: CLEAN_UP_SPOT
+    }
+}
 
 // Thunks
+export const createSpotImage = (imageObj, spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(imageObj)
+    })
+
+    if (response.ok) {
+        const newImage = await response.json()
+        return newImage
+    }
+}
 
 export const createSpot = (spot) => async (dispatch) => {
 
@@ -127,6 +149,10 @@ const spotReducer = (state = initialState, action) => {
 
         case EDIT_SPOT:
             newState.oneSpot[action.spot.id] = action.spot
+            return newState
+
+        case CLEAN_UP_SPOT:
+            newState.oneSpot = {}
             return newState
 
         default:
