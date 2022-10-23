@@ -43,6 +43,58 @@ const validateReview = [
     handleValidationErrors
 ];
 
+const validateBooking = [
+    check('startDate')
+        .exists({ checkFalsy: true })
+        .withMessage('Start date is required')
+        .bail()
+        .isDate()
+        .withMessage('Must be in date format, YYYY-MM-DD'),
+    check('endDate')
+        .exists({ checkFalsy: true })
+        .withMessage('End Date is required')
+        .bail()
+        .isDate()
+        .withMessage('Must be in date format, YYYY-MM-DD'),
+    handleValidationErrors
+];
+
+const validateQueryParameters = [
+    check('page')
+        .isInt({ min: 1, max: 10 })
+        .optional()
+        .withMessage('Page must be greater than or equal to 1'),
+    check('size')
+        .isInt({ min: 1, max: 20 })
+        .optional()
+        .withMessage('Size must be greater than or equal to 1'),
+    check('minLat')
+        .isDecimal()
+        .optional()
+        .withMessage('Minimum latitude is invalid'),
+    check('maxLat')
+        .isDecimal()
+        .optional()
+        .withMessage('Maximum latitude is invalid'),
+    check('minLng')
+        .isDecimal()
+        .optional()
+        .withMessage('Minimum longitude is invalid'),
+    check('maxLng')
+        .isDecimal()
+        .optional()
+        .withMessage('Maximum longitude is invalid'),
+    check('minPrice')
+        .isDecimal({ min: 0 })
+        .optional()
+        .withMessage('Minimum price must be greater than or equal to 0'),
+    check('maxPrice')
+        .isDecimal({ min: 0 })
+        .optional()
+        .withMessage('Maximum price must be greater than or equal to 0'),
+    handleValidationErrors
+];
+
 // Get all spots
 
 // create pagination middleware
@@ -63,7 +115,7 @@ function createPaginationObject(req, res, next) {
     next();
 }
 
-router.get("/", createPaginationObject, async (req, res) => {
+router.get("/", validateQueryParameters, createPaginationObject, async (req, res) => {
     page = parseInt(req.page)
     size = parseInt(req.size)
 
