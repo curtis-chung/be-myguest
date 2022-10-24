@@ -79,6 +79,14 @@ HOSTING:
 
 
 
+## Wiki Link
+- [API DOCUMENTATION](https://github.com/curtis-chung/Airbnb-project/wiki/API-Documentation)
+- [DATABASE SCHEMA](https://github.com/curtis-chung/Airbnb-project/wiki/Schema)
+- [FEATURES LIST](https://github.com/curtis-chung/Airbnb-project/wiki/Features-List)
+- [REDUX STATE SHAPE](https://github.com/curtis-chung/Airbnb-project/wiki/Redux-State-Shape)
+
+
+
 ## Features
 
 - Homepage
