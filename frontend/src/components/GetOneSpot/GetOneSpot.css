@@ -207,7 +207,6 @@
 .create-a-review-button:hover {
     border: 1px solid transparent;
     background-color: rgb(243, 243, 243);
-    border: 3px solid red;
 }
 
 .spot-line {

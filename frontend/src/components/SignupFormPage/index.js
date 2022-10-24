@@ -45,7 +45,7 @@ function SignupFormPage() {
                                         type="text"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        required
+                                        // required
                                         placeholder="Email"
                                         className="sign-up-input-fields-1"
                                     />
@@ -58,7 +58,7 @@ function SignupFormPage() {
                                         type="text"
                                         value={username}
                                         onChange={(e) => setUsername(e.target.value)}
-                                        required
+                                        // required
                                         placeholder="Username"
                                         className="sign-up-input-fields-2"
                                     />
@@ -71,7 +71,7 @@ function SignupFormPage() {
                                         type="password"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
-                                        required
+                                        // required
                                         placeholder="Password"
                                         className="sign-up-input-fields-3"
                                     />
@@ -84,7 +84,7 @@ function SignupFormPage() {
                                         type="password"
                                         value={confirmPassword}
                                         onChange={(e) => setConfirmPassword(e.target.value)}
-                                        required
+                                        // required
                                         placeholder="Confirm Password"
                                         className="sign-up-input-fields-4"
                                     />

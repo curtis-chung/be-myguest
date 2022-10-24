@@ -35,7 +35,7 @@ function SignupForm({ clickedX }) {
         <div className='sign-up-container'>
             <div className="sign-up-container-header">
                 <button onClick={clickedX} className='close-button'>x</button>
-                <div className="sign-up-for-bemyguest">Log in or sign up</div>
+                <div className="sign-up-for-bemyguest">Sign Up</div>
             </div>
             <div className="sign-up-container-body">
                 <form onSubmit={handleSubmit} className="sign-up-form-box">

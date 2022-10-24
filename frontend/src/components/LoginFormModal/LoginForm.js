@@ -36,7 +36,7 @@ function LoginForm({ clickedX }) {
         <div className='container'>
             <div className="container-header">
                 <button onClick={clickedX} className='close-button'>x</button>
-                <div className="log-in-or-sign-up">Log in or sign up</div>
+                <div className="log-in-or-sign-up">Log In</div>
             </div>
             <div className="container-body">
                 <form onSubmit={handleSubmit} className="form-box">

@@ -14,7 +14,7 @@ const CreateReviewForm = ({ clickedX }) => {
     const sessionUser = useSelector((state) => state.session.user);
 
     const [review, setReview] = useState("");
-    const [stars, setStars] = useState(0);
+    const [stars, setStars] = useState("");
     const [errors, setErrors] = useState({});
 
     const handleSubmit = async (e) => {
@@ -54,32 +54,28 @@ const CreateReviewForm = ({ clickedX }) => {
                     <div className="create-review-container-body-content">
                         <div className="welcome">Welcome to Be-myguest</div>
                         <div className='create-review-inputs'>
-                            <div className="text-area-div">
-                                <label className="create-review-label"> Review
-                                    <input
-                                        type="text"
-                                        value={review}
-                                        onChange={(e) => setReview(e.target.value)}
-                                        // required
-                                        placeholder="Review"
-                                        className="create-review-input-fields"
-                                    />
-                                </label>
+                            <div>
+                                <input
+                                    type="text"
+                                    value={review}
+                                    onChange={(e) => setReview(e.target.value)}
+                                    // required
+                                    placeholder="Review"
+                                    className="create-review-input-fields"
+                                />
                             </div>
                             <div className='line'></div>
                             <div>
-                                <label className="create-review-label"> Rating
-                                    <input
-                                        type="number"
-                                        value={stars}
-                                        onChange={(e) => setStars(e.target.value)}
-                                        // required
-                                        placeholder="# of stars"
-                                        // min="1"
-                                        // max="5"
-                                        className="create-review-input-fields"
-                                    />
-                                </label>
+                                <input
+                                    type="number"
+                                    value={stars}
+                                    onChange={(e) => setStars(e.target.value)}
+                                    // required
+                                    placeholder="# of stars"
+                                    min="1"
+                                    max="5"
+                                    className="create-review-input-fields"
+                                />
                             </div>
                             <div className='line'></div>
                         </div>
