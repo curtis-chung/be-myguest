@@ -11,25 +11,25 @@ const validateSignup = [
         .isEmail()
         .withMessage('Please provide a valid email.'),
     check('username')
-        .exists({ checkFalsy: true })
-        .isLength({ min: 4 })
-        .withMessage('Please provide a username with at least 4 characters.'),
-    check('username')
         .not()
         .isEmail()
         .withMessage('Username cannot be an email.'),
+    check('username')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 1, max: 50 })
+        .withMessage('Username must be between 1 and 50 characters.'),
     check('password')
         .exists({ checkFalsy: true })
-        .isLength({ min: 6 })
-        .withMessage('Password must be 6 characters or more.'),
+        .isLength({ min: 6, max: 50 })
+        .withMessage('Password must be between 6 and 50 characters'),
     check('firstName')
         .exists({ checkFalsy: true })
-        .isLength({ min: 1 })
-        .withMessage('Please provide a first name with at least 1 characters.'),
+        .isLength({ min: 1, max: 50 })
+        .withMessage('First name must be between 1 and 50 characters'),
     check('lastName')
         .exists({ checkFalsy: true })
-        .isLength({ min: 1 })
-        .withMessage('Please provide a last name with at least 1 characters.'),
+        .isLength({ min: 1, max: 50 })
+        .withMessage('Last name must be between 1 and 50 characters'),
     handleValidationErrors
 ];
 

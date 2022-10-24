@@ -8,34 +8,34 @@ const router = express.Router();
 
 const validateSpot = [
     check('address')
-        .isLength({ min: 1, max: 255 })
-        .withMessage("Address must be between 1 and 255 characters"),
+        .isLength({ min: 1, max: 50 })
+        .withMessage("Address must be between 1 and 50 characters"),
     check('city')
-        .isLength({ min: 1, max: 255 })
-        .withMessage("City must be between 1 and 255 characters"),
+        .isLength({ min: 1, max: 50 })
+        .withMessage("City must be between 1 and 50 characters"),
     check('state')
-        .isLength({ min: 1, max: 255 })
-        .withMessage("State must be between 1 and 255 characters"),
+        .isLength({ min: 1, max: 50 })
+        .withMessage("State must be between 1 and 50 characters"),
     check('country')
-        .isLength({ min: 1, max: 255 })
-        .withMessage("Country must be between 1 and 255 characters"),
+        .isLength({ min: 1, max: 50 })
+        .withMessage("Country must be between 1 and 50 characters"),
     check('name')
-        .isLength({ min: 1, max: 255 })
-        .withMessage("Name must be between 1 and 255 characters"),
+        .isLength({ min: 1, max: 50 })
+        .withMessage("Spot name must be between 1 and 50 characters"),
     check('description')
-        .isLength({ min: 1, max: 255 })
-        .withMessage("Description must be between 1 and 255 characters"),
+        .isLength({ min: 1, max: 50 })
+        .withMessage("Description must be between 1 and 50 characters"),
     check('price')
         .isFloat({ min: 1 })
-        .withMessage("Price must be at least $1"),
+        .withMessage("Price must be at least 1 dollar"),
 
     handleValidationErrors
 ];
 
 const validateReview = [
     check('review')
-        .isLength({ min: 1, max: 255 })
-        .withMessage("Review must be between 1 and 255 characters"),
+        .isLength({ min: 1, max: 50 })
+        .withMessage("Review must be between 1 and 50 characters"),
     check('stars')
         .isFloat({ min: 1, max: 5 })
         .withMessage("Rating must be between 1 and 5"),
