@@ -6,7 +6,6 @@ import "./GetAllSpot.css"
 
 const GetAllSpot = () => {
     const dispatch = useDispatch();
-    const [isLoaded, setIsLoaded] = useState(false);
 
     const spotsObj = useSelector((state) => {
         return state?.spot?.allSpot // {}
@@ -15,7 +14,6 @@ const GetAllSpot = () => {
     let spotsArr;
     if (spotsObj) {
         spotsArr = Object.values(spotsObj)
-        setIsLoaded(true)
     }
 
     // console.log(allSpots)
@@ -28,7 +26,7 @@ const GetAllSpot = () => {
 
     return (
         <>
-            {isLoaded && (
+            {spotsArr && (
                 <div className="get-all-spot-container">
                     {spotsArr?.map((spot) => (
                         <SpotCard key={spot.id} spot={spot} />

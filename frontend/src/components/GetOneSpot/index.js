@@ -62,9 +62,10 @@ const GetOneSpot = () => {
 
     if (existingReviews) {
         reviewsArr = reviewsBySpotId
-    } else {
-        reviewsArr = "No reviews yet"
     }
+    // } else {
+    //     reviewsArr = "No reviews yet"
+    // }
 
     //console.log("checking review dispatcher", reviewsArr)
 
@@ -98,6 +99,8 @@ const GetOneSpot = () => {
 
     //is spot owner
     let isSpotOwner = false
+    // console.log(sessionUser.id)
+    // console.log(spotById.ownerId)
 
     if (sessionUser?.id === spotById?.ownerId) {
         isSpotOwner = true
@@ -110,13 +113,32 @@ const GetOneSpot = () => {
         isLoggedIn = true
     }
 
+    // console.log("reviewsArr", reviewsArr)
+
+    //reviewed already
+    // let hasReview = false
+    // console.log(reviewsArr)
+    // if (reviewsArr.length) {
+    //     console.log("inloop", reviewsArr)
+    //     reviewsArr.forEach(review => {
+    //         console.log("inforeach", review)
+    //         if (review?.userId === sessionUser.id) {
+    //             hasReview = true;
+    //         }
+    //     })
+    // }
+    // console.log(reviewsArr)
+    const reviewUserId = reviewsArr?.map(review => review.User.id)
+    // console.log(reviewUserId)
+
     useEffect(() => {
         dispatch(spotActions.getOneSpot(spotId))
-            .then(() => dispatch(reviewActions.getCurrentSpotReviews(spotId)))
+        dispatch(reviewActions.getCurrentSpotReviews(spotId))
             .then(setExistingReviews(true))
             .then(setIsLoaded(true))
-        return () => dispatch(spotActions.cleanUpSpot())
-        // .then(() => dispatch(reviewActions.cleanUpReviews(spotId)))
+        return () => {
+            dispatch(spotActions.cleanUpSpot()); dispatch(reviewActions.cleanUpReviews(spotId))
+        }
     }, [dispatch]);
 
     return (
@@ -194,7 +216,7 @@ const GetOneSpot = () => {
                             <div className="spot-description">{spotById?.description}</div>
                             <div className='spot-line'></div>
                             <div className="spot-review-container">
-                                {isLoggedIn && (<div>
+                                {isLoggedIn && !isSpotOwner && !reviewUserId.includes(sessionUser.id) && (<div>
                                     <button onClick={() => setCreateReviewModal(true)} className="create-a-review-button">
                                         Create Review
                                     </button>

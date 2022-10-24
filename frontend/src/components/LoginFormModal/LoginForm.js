@@ -9,7 +9,7 @@ function LoginForm({ clickedX }) {
     const sessionUser = useSelector(state => state.session.user);
     const [credential, setCredential] = useState('');
     const [password, setPassword] = useState('');
-    const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState({});
 
     if (sessionUser) return (
         <Redirect to="/" />
@@ -70,7 +70,7 @@ function LoginForm({ clickedX }) {
                             </div>
                         </div>
                         <ul>
-                            {errors.map((error, idx) => <li key={idx} className="login-error">{error}</li>)}
+                            {Object.values(errors).map((error, idx) => <li key={idx} className="login-error">{error}</li>)}
                         </ul>
                         <div className='login-button-div'>
                             <button type="submit" className="login-button">Log In</button>

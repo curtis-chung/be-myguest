@@ -24,7 +24,7 @@ const EditSpotForm = ({ clickedX }) => {
     const [description, setDescription] = useState(spotById?.description);
     const [price, setPrice] = useState(spotById?.price);
     const [imgUrl, setImgUrl] = useState(spotById?.SpotImages[0].url);
-    const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState({});
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -176,7 +176,7 @@ const EditSpotForm = ({ clickedX }) => {
                             </div> */}
                         </div>
                         <ul className="create-spot-error">
-                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                            {Object.values(errors).map((error, idx) => <li key={idx}>{error}</li>)}
                         </ul>
                         <div className="edit-spot-button-div">
                             <button type="submit" className="edit-spot-button">Save Changes</button>

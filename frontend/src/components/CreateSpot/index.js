@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Redirect, useParams } from "react-router-dom";
 import * as spotActions from "../../store/spot"
@@ -17,7 +17,7 @@ const CreateSpotForm = ({ clickedX }) => {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [imgUrl, setImgUrl] = useState("");
-    const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState({});
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -37,6 +37,7 @@ const CreateSpotForm = ({ clickedX }) => {
         const createdSpot = await dispatch(spotActions.createSpot(spot))
             .catch(async (res) => {
                 const data = await res.json();
+                // console.log(data)
                 if (data && data.errors) setErrors(data.errors);
             });
 
@@ -158,7 +159,7 @@ const CreateSpotForm = ({ clickedX }) => {
                                         type="text"
                                         value={imgUrl}
                                         onChange={(e) => setImgUrl(e.target.value)}
-                                        // required
+                                        required
                                         placeholder="Photo URL"
                                         className="create-spot-input-fields"
                                     />
@@ -166,7 +167,7 @@ const CreateSpotForm = ({ clickedX }) => {
                             </div>
                         </div>
                         <ul className="create-spot-error">
-                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                            {Object.values(errors).map((error, idx) => <li key={idx}>{error}</li>)}
                         </ul>
                         <div className="create-spot-button-div">
                             <button type="submit" className="create-spot-button">Let's Host</button>

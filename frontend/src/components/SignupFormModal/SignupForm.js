@@ -13,7 +13,7 @@ function SignupForm({ clickedX }) {
     const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState({});
 
     if (sessionUser) return <Redirect to="/" />;
 
@@ -121,7 +121,7 @@ function SignupForm({ clickedX }) {
                             </div>
                         </div>
                         <ul>
-                            {errors.map((error, idx) => <li key={idx} className="sign-up-error">{error}</li>)}
+                            {Object.values(errors).map((error, idx) => <li key={idx} className="sign-up-error">{error}</li>)}
                         </ul>
                         <div className="signup-button-div">
                             <button type="submit" className="sign-up-signup-button">Sign Up</button>

@@ -81,6 +81,7 @@ export const getAllSpot = () => async (dispatch) => {
 
     if (response.ok) {
         const allSpots = await response.json()
+        // console.log(allSpots)
         dispatch(getAllSpotAction(allSpots))
     }
 }
@@ -137,7 +138,7 @@ const spotReducer = (state = initialState, action) => {
 
         case GET_ALL_SPOT:
             const allSpotsList = {};
-            action.list.forEach(spot => {
+            action.list.Spots.forEach(spot => {
                 allSpotsList[spot.id] = spot
             })
             newState.allSpot = allSpotsList

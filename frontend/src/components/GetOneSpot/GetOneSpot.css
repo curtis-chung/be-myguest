@@ -99,7 +99,7 @@
     box-sizing: border-box;
     height: 560px;
     width: 100%;
-    border-top-right-radius: 20px;
+    border-radius: 20px;
 }
 
 .spot-images-container-left {
@@ -109,7 +109,7 @@
 }
 
 .spot-images-container-middle {
-    width: 7px
+    width: 7px;
 }
 
 .spot-images-container-right {
@@ -156,7 +156,7 @@
 .spot-images-container-right-bottom-left {
     width: 50%;
     border-bottom-right-radius: 20px;
-    border-top-right-radius: 20px;
+    /* border-top-right-radius: 20px; */
 }
 
 .spot-images-container-right-middle {

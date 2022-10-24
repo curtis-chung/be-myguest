@@ -14,7 +14,7 @@ const CreateReviewForm = ({ clickedX }) => {
 
     const [review, setReview] = useState("");
     const [stars, setStars] = useState(0);
-    const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState({});
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -82,7 +82,7 @@ const CreateReviewForm = ({ clickedX }) => {
                             <div className='line'></div>
                         </div>
                         <ul className="create-spot-error">
-                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                            {Object.values(errors).map((error, idx) => <li key={idx}>{error}</li>)}
                         </ul>
                         <div className="create-review-button-div">
                             <button type="submit" className="create-review-button">Create Review</button>

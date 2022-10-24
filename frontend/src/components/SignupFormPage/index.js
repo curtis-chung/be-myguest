@@ -11,7 +11,7 @@ function SignupFormPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState({});
 
     if (sessionUser) return <Redirect to="/" />;
 
@@ -92,7 +92,7 @@ function SignupFormPage() {
                             </div>
                         </div>
                         <ul>
-                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                            {Object.values(errors).map((error, idx) => <li key={idx}>{error}</li>)}
                         </ul>
                         <div>
                             <button type="submit" className="sign-up-signup-button">Sign Up</button>
