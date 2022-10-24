@@ -40,7 +40,7 @@
     <a href="https://github.com/curtis-chung/Airbnb-project"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/curtis-chung/Airbnb-project">View Demo</a>
+    <a href="https://be-myguest.herokuapp.com/">Live Link</a>
   </p>
 </div>
 
