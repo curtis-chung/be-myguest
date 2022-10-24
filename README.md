@@ -84,13 +84,13 @@ HOSTING:
 ## Features
 
 - Homepage
-![/assets/Homepage.JPG]
+!image[/assets/Homepage.JPG]
 - Get Spot
-![/assets/onespot.JPG]
+!image[/assets/onespot.JPG]
 - Create Review
-![/assets/reviews.JPG]
+!image[/assets/reviews.JPG]
 - Signup
-![/assets/signup.JPG]
+!image[/assets/signup.JPG]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
