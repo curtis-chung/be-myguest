@@ -58,7 +58,8 @@ const GetOneSpot = () => {
     const reviewsBySpotId = useSelector((state) => {
         return Object.values(state?.review?.currentSpotReviews)
     })
-    let reviewsArr;
+
+    let reviewsArr = [];
 
     if (existingReviews) {
         reviewsArr = reviewsBySpotId
@@ -113,23 +114,43 @@ const GetOneSpot = () => {
         isLoggedIn = true
     }
 
-    // console.log("reviewsArr", reviewsArr)
+    // // console.log("reviewsArr", reviewsArr)
 
-    //reviewed already
+    // //reviewed already
     // let hasReview = false
     // console.log(reviewsArr)
-    // if (reviewsArr.length) {
-    //     console.log("inloop", reviewsArr)
-    //     reviewsArr.forEach(review => {
-    //         console.log("inforeach", review)
-    //         if (review?.userId === sessionUser.id) {
-    //             hasReview = true;
-    //         }
-    //     })
-    // }
+    // reviewsArr.forEach(review => {
+    //     console.log("inforeach", review)
+    //     if (review?.userId === sessionUser.id) {
+    //         hasReview = true;
+    //     }
+    // })
+
     // console.log(reviewsArr)
-    const reviewUserId = reviewsArr?.map(review => review.User.id)
+    // const reviewUserId = reviewsArr?.map(review => review.User.id)
+    // let hasReview = true
     // console.log(reviewUserId)
+    // if (reviewUserId) {
+
+    //     if (reviewUserId.includes(sessionUser.id)) {
+    //         hasReview = false
+    //     }
+    // }
+
+    // console.log("owner", isSpotOwner, "loggedin", isLoggedIn, "hasrev", hasReview)
+
+    // console.log(reviewUserId)
+
+    let allowCreateReview = false;
+    if ((sessionUser?.id !== spotById?.ownerId) && (sessionUser)) {
+        allowCreateReview = true;
+    }
+    reviewsArr.forEach(review => {
+        console.log("inforeach", review)
+        if (review?.userId === sessionUser.id) {
+            allowCreateReview = false;
+        }
+    })
 
     useEffect(() => {
         dispatch(spotActions.getOneSpot(spotId))
@@ -140,6 +161,9 @@ const GetOneSpot = () => {
             dispatch(spotActions.cleanUpSpot()); dispatch(reviewActions.cleanUpReviews(spotId))
         }
     }, [dispatch]);
+
+    if (!Object.values(spotById).length) return null;
+    console.log("spotById", spotById)
 
     return (
         <>
@@ -216,7 +240,7 @@ const GetOneSpot = () => {
                             <div className="spot-description">{spotById?.description}</div>
                             <div className='spot-line'></div>
                             <div className="spot-review-container">
-                                {isLoggedIn && !isSpotOwner && !reviewUserId.includes(sessionUser.id) && (<div>
+                                {allowCreateReview && (<div>
                                     <button onClick={() => setCreateReviewModal(true)} className="create-a-review-button">
                                         Create Review
                                     </button>

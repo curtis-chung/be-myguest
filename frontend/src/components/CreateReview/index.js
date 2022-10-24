@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Redirect, useParams } from "react-router-dom";
 import * as reviewActions from "../../store/review"
+import * as spotActions from "../../store/spot"
 import "./CreateReview.css"
 
 const CreateReviewForm = ({ clickedX }) => {
@@ -36,6 +37,7 @@ const CreateReviewForm = ({ clickedX }) => {
             //console.log(createdReview)
             clickedX()
             dispatch(reviewActions.getCurrentSpotReviews(spotId))
+            dispatch(spotActions.getOneSpot(spotId))
             // await dispatch(reviewActions.createReview(createdReview, spotId))
             history.push(`/spots/${spotId}`)
         }
