@@ -12,7 +12,7 @@
     /* align-items: center; */
     flex-direction: column;
     box-sizing: border-box;
-    margin: 24px;
+    /* margin: 24px; */
 }
 
 @media (max-width: 1024px) {
@@ -27,6 +27,7 @@
     box-sizing: border-box;
     flex-direction: row;
     width: 100%;
+    margin-top: 25px;
 }
 
 .get-one-spot-body-top-right {
@@ -45,7 +46,7 @@
     font-size: 14px;
     border: transparent solid 1px;
     border-radius: 500px;
-    font-weight: 600px;
+    font-weight: 600;
     font-size: 14px;
     cursor: pointer;
 }
@@ -66,7 +67,7 @@
 
 .spot-name {
     font-size: 26px;
-    font-weight: 700px;
+    font-weight: 500;
     margin-bottom: 4px;
 }
 
@@ -198,7 +199,7 @@
     font-size: 14px;
     border: transparent solid 1px;
     border-radius: 500px;
-    font-weight: 600px;
+    font-weight: 600;
     font-size: 14px;
     cursor: pointer;
 }
@@ -206,6 +207,7 @@
 .create-a-review-button:hover {
     border: 1px solid transparent;
     background-color: rgb(243, 243, 243);
+    border: 3px solid red;
 }
 
 .spot-line {
@@ -215,7 +217,7 @@
 
 .spot-host {
     font-size: 22px;
-    font-weight: 600px;
+    font-weight: 500;
     margin-bottom: 25px;
 }
 
@@ -231,6 +233,18 @@
     flex-direction: column;
     box-sizing: border-box;
     margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.reviews-and-button {
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Roboto', sans-serif;
+    font-size: 22px;
+    font-weight: 500;
 }
 
 .spot-review-container-card {

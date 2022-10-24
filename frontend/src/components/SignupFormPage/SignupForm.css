@@ -51,7 +51,7 @@
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    font-size: 16;
+    font-size: 16px;
 }
 
 .sign-up-container-body {
@@ -130,5 +130,5 @@
 .sign-up-error {
     color: red;
     font-size: 12px;
-    font-weight: 400px;
+    font-weight: 400;
 }

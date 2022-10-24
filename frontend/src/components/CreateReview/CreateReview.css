@@ -51,7 +51,7 @@
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    font-size: 16;
+    font-size: 16px;
 }
 
 .create-review-container-body {
@@ -141,7 +141,7 @@
 .create-review-error {
     color: red;
     font-size: 12px;
-    font-weight: 400px;
+    font-weight: 400;
 }
 
 .create-review-label {

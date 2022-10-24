@@ -147,7 +147,7 @@ const GetOneSpot = () => {
     }
     reviewsArr.forEach(review => {
         console.log("inforeach", review)
-        if (review?.userId === sessionUser.id) {
+        if (review?.userId === sessionUser?.id) {
             allowCreateReview = false;
         }
     })
@@ -163,7 +163,7 @@ const GetOneSpot = () => {
     }, [dispatch]);
 
     if (!Object.values(spotById).length) return null;
-    console.log("spotById", spotById)
+    // console.log("spotById", spotById)
 
     return (
         <>
@@ -240,16 +240,16 @@ const GetOneSpot = () => {
                             <div className="spot-description">{spotById?.description}</div>
                             <div className='spot-line'></div>
                             <div className="spot-review-container">
-                                {allowCreateReview && (<div>
-                                    <button onClick={() => setCreateReviewModal(true)} className="create-a-review-button">
+                                <div className="reviews-and-button"> {numReviews}
+                                    {allowCreateReview && (<><button onClick={() => setCreateReviewModal(true)} className="create-a-review-button">
                                         Create Review
                                     </button>
-                                    {createReviewModal &&
-                                        <Modal Modal onClose={() => setCreateReviewModal(false)}>
-                                            <CreateReviewForm clickedX={createReviewX} />
-                                        </Modal>
-                                    }
-                                </div>)}
+                                        {createReviewModal &&
+                                            <Modal Modal onClose={() => setCreateReviewModal(false)}>
+                                                <CreateReviewForm clickedX={createReviewX} />
+                                            </Modal>
+                                        }</>)}
+                                </div>
                                 {/* <div>
                                     <button onClick={() => setCreateReviewModal(true)} className="create-a-review-button">
                                         Create Review

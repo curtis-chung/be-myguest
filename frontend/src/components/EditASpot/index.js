@@ -51,6 +51,7 @@ const EditSpotForm = ({ clickedX }) => {
             // console.log("edit", edittedSpot)
             // await dispatch(spotActions.createSpotImage(imageObj, edittedSpot.id))
             await dispatch(spotActions.getOneSpot(spotId))
+            await dispatch(spotActions.getAllSpot())
             clickedX()
         }
     }
@@ -89,7 +90,7 @@ const EditSpotForm = ({ clickedX }) => {
                                         type="text"
                                         value={city}
                                         onChange={(e) => setCity(e.target.value)}
-                                        required
+                                        // required
                                         placeholder="City"
                                         className="edit-spot-input-fields"
                                     />
