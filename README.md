@@ -35,7 +35,7 @@
 <h3 align="center">be-myguest</h3>
 
   <p align="center">
-    be-my-guest is a web application inspired by Airbnb, that provides an online marketplace for loding, primarily homestays for vacation rentals, and tourism activities.
+    Full-stack application clone of Airbnb built with React, Redux and Express
     <br />
     <a href="https://github.com/curtis-chung/Airbnb-project"><strong>Explore the docs »</strong></a>
     <br />
@@ -48,8 +48,6 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 be-my-guest is a web application inspired by Airbnb, that provides an online marketplace for loding, primarily homestays for vacation rentals, and tourism activities.
 
@@ -101,6 +99,7 @@ HOSTING:
 
 * Implement bookings
 * Implement Google API
+* Implement preview image scrolling
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -127,7 +126,7 @@ HOSTING:
 <!-- CONTACT -->
 ## Contact
 
-Curtis Chung - curtischung06@gmail.com
+Linkedin: [https://www.linkedin.com/in/chungcurtis](https://www.linkedin.com/in/chungcurtis/)
 
 Project Link: [https://github.com/curtis-chung/Airbnb-project](https://github.com/curtis-chung/Airbnb-project)
 
