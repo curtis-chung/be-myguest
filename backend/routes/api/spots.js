@@ -23,8 +23,8 @@ const validateSpot = [
         .isLength({ min: 1, max: 50 })
         .withMessage("Spot name must be between 1 and 50 characters"),
     check('description')
-        .isLength({ min: 1, max: 50 })
-        .withMessage("Description must be between 1 and 50 characters"),
+        .isLength({ min: 1, max: 200 })
+        .withMessage("Description must be between 1 and 200 characters"),
     check('price')
         .isFloat({ min: 1 })
         .withMessage("Price must be at least 1 dollar"),

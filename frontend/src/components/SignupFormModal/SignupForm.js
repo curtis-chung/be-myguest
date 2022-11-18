@@ -48,7 +48,7 @@ function SignupForm({ clickedX }) {
                                         type="text"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        required
+                                        // required
                                         placeholder="Email"
                                         className="sign-up-input-fields"
                                     />
@@ -61,7 +61,7 @@ function SignupForm({ clickedX }) {
                                         type="text"
                                         value={username}
                                         onChange={(e) => setUsername(e.target.value)}
-                                        required
+                                        // required
                                         placeholder="Username"
                                         className="sign-up-input-fields"
                                     />
@@ -74,7 +74,7 @@ function SignupForm({ clickedX }) {
                                         type="text"
                                         value={firstName}
                                         onChange={(e) => setFirstName(e.target.value)}
-                                        required
+                                        // required
                                         placeholder="First Name"
                                         className="sign-up-input-fields"
                                     />
@@ -87,7 +87,7 @@ function SignupForm({ clickedX }) {
                                         type="text"
                                         value={lastName}
                                         onChange={(e) => setLastName(e.target.value)}
-                                        required
+                                        // required
                                         placeholder="Last Name"
                                         className="sign-up-input-fields"
                                     />
@@ -100,7 +100,7 @@ function SignupForm({ clickedX }) {
                                         type="password"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
-                                        required
+                                        // required
                                         placeholder="Password"
                                         className="sign-up-input-fields"
                                     />
@@ -113,7 +113,7 @@ function SignupForm({ clickedX }) {
                                         type="password"
                                         value={confirmPassword}
                                         onChange={(e) => setConfirmPassword(e.target.value)}
-                                        required
+                                        // required
                                         placeholder="Confirm Password"
                                         className="sign-up-input-fields"
                                     />
