@@ -49,6 +49,7 @@
 
 .review-user-review {
     /* border: 1px solid yellow; */
-    margin-top: 10px;
-    font-size: 14px;
+    margin-top: 17px;
+    font-size: 16px;
+    line-height: 24px;
 }
