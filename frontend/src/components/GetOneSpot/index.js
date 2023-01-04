@@ -8,6 +8,7 @@ import { Modal } from '../../context/Modal';
 import EditSpotForm from "../EditASpot";
 import CreateReviewForm from "../CreateReview";
 import ReviewPreview from "../ReviewPreview";
+import AirCover from "../../images/aircover.png"
 
 const GetOneSpot = () => {
     const { spotId } = useParams();
@@ -15,6 +16,10 @@ const GetOneSpot = () => {
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
     // console.log("sessionUser", sessionUser) // {}
+    const today = new Date();
+    const newDate = today.setDate(today.getDate() + 30);
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const thirtyDays = new Date(newDate).toLocaleDateString(undefined, options).split(",")[1];
 
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -60,9 +65,11 @@ const GetOneSpot = () => {
     })
 
     let reviewsArr = [];
+    // console.log("reviews", reviewsArr)
 
     if (existingReviews) {
         reviewsArr = reviewsBySpotId
+        // console.log("reviews", reviewsArr)
     }
     // } else {
     //     reviewsArr = "No reviews yet"
@@ -177,13 +184,15 @@ const GetOneSpot = () => {
                                 </div>
                                 <div className="ratings-reviews-address">
                                     <div className="spot-ratings">
-                                        <div><i class="fa-solid fa-star"></i>{spotRating}</div>
+                                        <div><i class="fa-solid fa-star">&nbsp;</i>{spotRating}</div>
                                     </div>
-                                    {/* <div>·</div> */}
+                                    <div style={{ marginRight: "10px" }}>·</div>
                                     <div className="spot-reviews">
                                         <div>{numReviews}</div>
                                     </div>
-                                    {/* <div>·</div> */}
+                                    <div style={{ marginRight: "10px" }}>·</div>
+                                    <div className="spot-reviews" style={{ alignItems: "center" }}><i class="fa-solid fa-medal" style={{ fontSize: "12px" }}></i>&nbsp;Superhost</div>
+                                    <div style={{ marginRight: "10px" }}>·</div>
                                     <div className="spot-address">
                                         <div>{spotById?.city}, {spotById?.state}, {spotById?.country}</div>
                                     </div>
@@ -235,12 +244,52 @@ const GetOneSpot = () => {
                         <div className="spot-images-container-right-middle"></div>
 
                         <div className="get-one-spot-body-bottom">
-                            <div className="spot-host">Entire home hosted by {spotById?.Owner?.firstName}</div>
-                            <div className='spot-line'></div>
-                            <div className="spot-description">{spotById?.description}</div>
-                            <div className='spot-line'></div>
+                            <div className="spot-width spot-host">Entire home hosted by {spotById?.Owner?.firstName}</div>
+                            <div className="spot-width spot-specifications">
+                                <div className="spot-spec">
+                                    <i class="fa-solid fa-computer" style={{ fontSize: "18px", marginRight: "16px" }}></i>
+                                    <div>
+                                        <div className="spec-title">Dedicated workspace</div>
+                                        <div className="spec-body">A private room with wifi that’s well-suited for working.</div>
+                                    </div>
+                                </div>
+                                <div className="spot-spec">
+                                    <i class="fa-solid fa-door-open" style={{ fontSize: "18px", marginRight: "16px" }}></i>
+                                    <div>
+                                        <div>
+                                            <div className="spec-title">Self check-in</div>
+                                            <div className="spec-body">Check yourself in with the keypad.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="spot-spec">
+                                    <i class="fa-solid fa-medal" style={{ fontSize: "18px", marginRight: "16px" }}></i>
+                                    <div>
+                                        <div className="spec-title">{spotById?.Owner?.firstName} is a Superhost</div>
+                                        <div className="spec-body">Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.</div>
+                                    </div>
+                                </div>
+                                <div className="spot-spec" style={{ margin: "0" }}>
+                                    <i class="fa-solid fa-calendar" style={{ fontSize: "18px", marginRight: "16px" }}></i>
+                                    <div className="spec-title">
+                                        Free cancellation before {thirtyDays}.
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="spot-width air-cover">
+                                <img src={AirCover} style={{ width: "114px" }} />
+                                <div style={{ marginTop: "21px" }}>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
+                                </div>
+                            </div>
+                            <div className="spot-width spot-description">{spotById?.description}</div>
                             <div className="spot-review-container">
-                                <div className="reviews-and-button"> {numReviews}
+                                <div className="reviews-and-button">
+                                    <div style={{ display: "flex", alignItems: "center" }}>
+                                        <i class="fa-solid fa-star" style={{ fontSize: "18px" }}>&nbsp;</i>
+                                        {spotRating}
+                                        <div style={{ margin: "0 5px" }}>·</div>
+                                        {numReviews}
+                                    </div>
                                     {allowCreateReview && (<><button onClick={() => setCreateReviewModal(true)} className="create-a-review-button">
                                         Create Review
                                     </button>
@@ -262,7 +311,7 @@ const GetOneSpot = () => {
                                 </div> */}
                                 <div className="spot-review-container-card">
                                     {reviewsArr.map((review) => (
-                                        <ReviewPreview key={review.id} review={review} spotId={spotId} sessionUser={sessionUser} />
+                                        <ReviewPreview key={review.id} review={review} spotId={spotId} sessionUser={sessionUser} created={review.updatedAt} />
                                     ))}
                                 </div>
                             </div>

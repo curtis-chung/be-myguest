@@ -81,11 +81,11 @@
 }
 
 .spot-ratings {
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 .spot-reviews {
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 /* .get-one-spot-body-middle {
@@ -187,7 +187,7 @@
 }
 
 .get-one-spot-body-bottom {
-    margin-top: 25px;
+    margin-top: 48px;
     display: flex;
     flex-direction: column;
 }
@@ -209,21 +209,22 @@
     background-color: rgb(243, 243, 243);
 }
 
-.spot-line {
+.spot-width {
     border-bottom: 1px solid lightgray;
     box-sizing: border-box;
+    width: 653px;
 }
 
 .spot-host {
     font-size: 22px;
     font-weight: 500;
-    margin-bottom: 25px;
+    padding-bottom: 32px;
 }
 
 .spot-description {
-    margin-top: 25px;
-    margin-bottom: 25px;
-    font-size: 14px;
+    margin-top: 32px;
+    padding-bottom: 32px;
+    font-size: 16px;
 }
 
 .spot-review-container {
@@ -231,8 +232,7 @@
     align-items: flex-end;
     flex-direction: column;
     box-sizing: border-box;
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin: 32px 0;
 }
 
 .reviews-and-button {
@@ -254,4 +254,36 @@
     justify-content: space-between;
     box-sizing: border-box;
     flex-wrap: wrap;
+}
+
+.spot-specifications {
+    /* border: 1px solid red; */
+    padding: 32px 0;
+}
+
+.spot-spec {
+    /* border: 1px solid blue; */
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.spec-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.spec-body {
+    margin-top: 4px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+}
+
+.air-cover {
+    padding: 32px 0;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
 }

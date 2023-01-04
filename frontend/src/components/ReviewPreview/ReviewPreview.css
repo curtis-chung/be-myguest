@@ -27,6 +27,7 @@
 .review-preview-container-top-left {
     display: flex;
     box-sizing: border-box;
+    align-items: center;
 }
 
 .review-avatar {

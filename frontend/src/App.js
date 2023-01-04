@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import CreateSpotForm from "./components/CreateSpot";
 import GetAllSpot from "./components/GetAllSpot";
 import GetOneSpot from "./components/GetOneSpot";
+import BottomNav from "./components/BottomNav";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,9 +23,11 @@ function App() {
         <Switch>
           <Route exact path="/">
             <GetAllSpot />
+            <BottomNav />
           </Route>
           <Route path="/spots/:spotId">
             <GetOneSpot />
+            <BottomNav />
           </Route>
         </Switch>
       )}

@@ -4,9 +4,12 @@ import * as reviewActions from "../../store/review";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 
-const ReviewPreview = ({ review, spotId, sessionUser }) => {
+const ReviewPreview = ({ review, spotId, sessionUser, created }) => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const date = `${new Date(created).toLocaleDateString(undefined, options).split(" ")[1] + " " + new Date(created).toLocaleDateString(undefined, options).split(" ")[3]}`;
+    console.log(date)
     // Delete review
     const handleDelete = async (e) => {
         e.preventDefault();
@@ -29,7 +32,10 @@ const ReviewPreview = ({ review, spotId, sessionUser }) => {
                     <div className="review-avatar">
                         <i class="fa-regular fa-user"></i>
                     </div>
-                    <div className="review-user-name">{review?.User?.firstName}</div>
+                    <div>
+                        <div className="review-user-name">{review?.User?.firstName}</div>
+                        <div style={{ fontSize: "14px", fontWeight: "300", lineHeight: "20px" }}>{date}</div>
+                    </div>
                 </div>
                 <div className="review-preview-container-top-right">
                     {isReviewOwner && (<div>
