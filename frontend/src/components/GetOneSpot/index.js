@@ -35,7 +35,7 @@ const GetOneSpot = () => {
     if (!spotById.avgStarRating) {
         spotRating = "New"
     } else {
-        spotRating = `${spotById.avgStarRating}`
+        spotRating = spotById.avgStarRating.toFixed(1)
     }
 
     spotImageArr = spotById?.SpotImages
@@ -244,93 +244,168 @@ const GetOneSpot = () => {
                         <div className="spot-images-container-right-middle"></div>
 
                         <div className="get-one-spot-body-bottom">
-                            <div className="spot-width spot-host">Entire home hosted by {spotById?.Owner?.firstName}</div>
-                            <div className="spot-width spot-specifications">
-                                <div className="spot-spec">
-                                    <i class="fa-solid fa-computer" style={{ fontSize: "18px", marginRight: "16px" }}></i>
-                                    <div>
-                                        <div className="spec-title">Dedicated workspace</div>
-                                        <div className="spec-body">A private room with wifi that’s well-suited for working.</div>
-                                    </div>
-                                </div>
-                                <div className="spot-spec">
-                                    <i class="fa-solid fa-door-open" style={{ fontSize: "18px", marginRight: "16px" }}></i>
-                                    <div>
+                            <div>
+                                <div className="spot-width spot-host">Entire home hosted by {spotById?.Owner?.firstName}</div>
+                                <div className="spot-width spot-specifications">
+                                    <div className="spot-spec">
+                                        <i class="fa-solid fa-computer" style={{ fontSize: "18px", marginRight: "16px" }}></i>
                                         <div>
-                                            <div className="spec-title">Self check-in</div>
-                                            <div className="spec-body">Check yourself in with the keypad.</div>
+                                            <div className="spec-title">Dedicated workspace</div>
+                                            <div className="spec-body">A private room with wifi that’s well-suited for working.</div>
+                                        </div>
+                                    </div>
+                                    <div className="spot-spec">
+                                        <i class="fa-solid fa-door-open" style={{ fontSize: "18px", marginRight: "16px" }}></i>
+                                        <div>
+                                            <div>
+                                                <div className="spec-title">Self check-in</div>
+                                                <div className="spec-body">Check yourself in with the keypad.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="spot-spec">
+                                        <i class="fa-solid fa-medal" style={{ fontSize: "18px", marginRight: "16px" }}></i>
+                                        <div>
+                                            <div className="spec-title">{spotById?.Owner?.firstName} is a Superhost</div>
+                                            <div className="spec-body">Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.</div>
+                                        </div>
+                                    </div>
+                                    <div className="spot-spec" style={{ margin: "0" }}>
+                                        <i class="fa-solid fa-calendar" style={{ fontSize: "18px", marginRight: "16px" }}></i>
+                                        <div className="spec-title">
+                                            Free cancellation before {thirtyDays}.
                                         </div>
                                     </div>
                                 </div>
-                                <div className="spot-spec">
-                                    <i class="fa-solid fa-medal" style={{ fontSize: "18px", marginRight: "16px" }}></i>
+                                <div className="spot-width air-cover">
+                                    <img src={AirCover} style={{ width: "114px" }} />
+                                    <div style={{ marginTop: "21px" }}>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
+                                    </div>
+                                </div>
+                                <div className="spot-description">{spotById?.description}</div>
+                            </div>
+                            <div style={{ marginLeft: "5%" }}>
+                                <div className="booking-container">
+                                    <div className="booking-container-1">
+                                        <div style={{ display: "flex", alignItems: "center" }}>
+                                            <span style={{ fontWeight: "600", fontSize: "22px", marginRight: "5px", lineHeight: "20px" }}>
+                                                {spotById.price.toLocaleString('en-US', {
+                                                    style: 'currency',
+                                                    currency: 'USD',
+                                                    minimumFractionDigits: 0,
+                                                    maximumFractionDigits: 0
+                                                })}
+                                            </span>
+                                            <div>
+                                                night
+                                            </div>
+                                        </div>
+                                        <div style={{ display: "flex", alignItems: "center", fontSize: "14px" }}>
+                                            <i class="fa-solid fa-star" style={{ fontSize: "12px" }}>&nbsp;</i>{spotRating}<div style={{ margin: "0 5px" }}>·</div><div style={{ color: "#717171" }}>{numReviews}</div>
+                                        </div>
+                                    </div>
+                                    <form className="booking-container-2">
+                                        <div className="booking-container-2-box booking-container-2-top">
+                                            <div className="booking-container-2-box-content booking-container-2-box-content-50" style={{ fontSize: "12px", fontWeight: "500" }}>CHECK-IN</div>
+                                            <div className="booking-container-2-box-content booking-container-2-box-content-50" style={{ fontSize: "12px", fontWeight: "500", borderLeft: "1px solid lightgray" }}>CHECKOUT</div>
+                                        </div>
+                                        <div className="booking-container-2-box-2 booking-container-2-bottom">
+                                            <div className="booking-container-2-box-content" style={{ fontSize: "12px", fontWeight: "500" }}>GUESTS</div>
+                                        </div>
+                                        <button className="reserve-button" type="submit">Reserve</button>
+                                        <div className="no-charge">You won't be charged yet.</div>
+                                    </form>
+                                    <div className="booking-container-3">
+                                        <div className="pricing-breakdown" style={{ display: "flex", alignItems: "center" }}>
+                                            <div>
+                                                {spotById.price.toLocaleString('en-US', {
+                                                    style: 'currency',
+                                                    currency: 'USD',
+                                                    minimumFractionDigits: 0,
+                                                    maximumFractionDigits: 0
+                                                })} x 2 nights
+                                            </div>
+                                            <div>
+                                                {(spotById.price * 2).toLocaleString('en-US', {
+                                                    style: 'currency',
+                                                    currency: 'USD',
+                                                    minimumFractionDigits: 0,
+                                                    maximumFractionDigits: 0
+                                                })}
+                                            </div>
+                                        </div>
+                                        <div className="pricing-breakdown" style={{ display: "flex", alignItems: "center" }}>
+                                            <div>
+                                                Cleaning fee
+                                            </div>
+                                            <div>
+                                                {(spotById.price * 2 * .05).toLocaleString('en-US', {
+                                                    style: 'currency',
+                                                    currency: 'USD',
+                                                    minimumFractionDigits: 0,
+                                                    maximumFractionDigits: 0
+                                                })}
+                                            </div>
+                                        </div>
+                                        <div className="pricing-breakdown" style={{ display: "flex", alignItems: "center", marginBottom: "25px" }}>
+                                            <div>
+                                                Service fee
+                                            </div>
+                                            <div>
+                                                {(spotById.price * 2 * .03).toLocaleString('en-US', {
+                                                    style: 'currency',
+                                                    currency: 'USD',
+                                                    minimumFractionDigits: 0,
+                                                    maximumFractionDigits: 0
+                                                })}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontWeight: "600", fontSize: "16px", lineHeight: "20px", padding: "25px 0", borderTop: "1px solid lightgray" }}>
+                                        <div>
+                                            Total before taxes
+                                        </div>
+                                        <div>
+                                            {(spotById.price * 2 + spotById.price * 2 * .05 + spotById.price * 2 * .03).toLocaleString('en-US', {
+                                                style: 'currency',
+                                                currency: 'USD',
+                                                minimumFractionDigits: 0,
+                                                maximumFractionDigits: 0
+                                            })}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="rare-find">
                                     <div>
-                                        <div className="spec-title">{spotById?.Owner?.firstName} is a Superhost</div>
-                                        <div className="spec-body">Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.</div>
+                                        <span style={{ fontWeight: "600" }}>This is a rare find.</span> {spotById.Owner.firstName}'s place on beMyGuest is usually fully booked.
                                     </div>
-                                </div>
-                                <div className="spot-spec" style={{ margin: "0" }}>
-                                    <i class="fa-solid fa-calendar" style={{ fontSize: "18px", marginRight: "16px" }}></i>
-                                    <div className="spec-title">
-                                        Free cancellation before {thirtyDays}.
-                                    </div>
+                                    <i class="fa-regular fa-gem" style={{ fontSize: "32px", color: "#ff385c" }}></i>
                                 </div>
                             </div>
-                            <div className="spot-width air-cover">
-                                <img src={AirCover} style={{ width: "114px" }} />
-                                <div style={{ marginTop: "21px" }}>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
+                        </div>
+                        <div className="spot-review-container">
+                            <div className="reviews-and-button">
+                                <div style={{ display: "flex", alignItems: "center" }}>
+                                    <i class="fa-solid fa-star" style={{ fontSize: "16px" }}>&nbsp;</i>
+                                    {spotRating}
+                                    <div style={{ margin: "0 5px" }}>·</div>
+                                    {numReviews}
                                 </div>
-                            </div>
-                            <div className="spot-width spot-description">{spotById?.description}</div>
-                            <div className="spot-review-container">
-                                <div className="reviews-and-button">
-                                    <div style={{ display: "flex", alignItems: "center" }}>
-                                        <i class="fa-solid fa-star" style={{ fontSize: "18px" }}>&nbsp;</i>
-                                        {spotRating}
-                                        <div style={{ margin: "0 5px" }}>·</div>
-                                        {numReviews}
-                                    </div>
-                                    {allowCreateReview && (<><button onClick={() => setCreateReviewModal(true)} className="create-a-review-button">
-                                        Create Review
-                                    </button>
-                                        {createReviewModal &&
-                                            <Modal Modal onClose={() => setCreateReviewModal(false)}>
-                                                <CreateReviewForm clickedX={createReviewX} />
-                                            </Modal>
-                                        }</>)}
-                                </div>
-                                {/* <div>
-                                    <button onClick={() => setCreateReviewModal(true)} className="create-a-review-button">
-                                        Create Review
-                                    </button>
+                                {allowCreateReview && (<><button onClick={() => setCreateReviewModal(true)} className="create-a-review-button">
+                                    Create Review
+                                </button>
                                     {createReviewModal &&
                                         <Modal Modal onClose={() => setCreateReviewModal(false)}>
                                             <CreateReviewForm clickedX={createReviewX} />
                                         </Modal>
-                                    }
-                                </div> */}
-                                <div className="spot-review-container-card">
-                                    {reviewsArr.map((review) => (
-                                        <ReviewPreview key={review.id} review={review} spotId={spotId} sessionUser={sessionUser} created={review.updatedAt} />
-                                    ))}
-                                </div>
+                                    }</>)}
                             </div>
-                            <div className='spot-line'></div>
-                            {/* <div className="create-review-button-div">
-                                <button onClick={() => setCreateReviewModal(true)} className="create-a-review-button">
-                                    Create Review
-                                </button>
-                                {createReviewModal &&
-                                    <Modal Modal onClose={() => setCreateReviewModal(false)}>
-                                        <CreateReviewForm clickedX={createReviewX} />
-                                    </Modal>
-                                }
-                            </div> */}
+                            <div className="spot-review-container-card">
+                                {reviewsArr.map((review) => (
+                                    <ReviewPreview key={review.id} review={review} spotId={spotId} sessionUser={sessionUser} created={review.updatedAt} />
+                                ))}
+                            </div>
                         </div>
-
-
-
-
                     </div>
                 </div>
             )}
