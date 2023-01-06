@@ -12,7 +12,7 @@ const EditSpotForm = ({ clickedX }) => {
         return state?.spot?.oneSpot
     })
 
-    console.log("spotById", spotById)
+    // console.log("spotById", spotById)
 
     const [address, setAddress] = useState(spotById?.address);
     const [city, setCity] = useState(spotById?.city);

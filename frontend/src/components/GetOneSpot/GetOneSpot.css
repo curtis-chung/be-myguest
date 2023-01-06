@@ -347,7 +347,6 @@
 .booking-container-2-box {
     width: 100%;
     height: 56px;
-    border: 1px solid lightgray;
 }
 
 .booking-container-2-box-2 {
@@ -363,12 +362,13 @@
     justify-content: space-between;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+    margin-bottom: 16px;
 }
 
 .booking-container-2-bottom {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
-    margin-bottom: 16px;
+
 }
 
 .no-charge {

@@ -9,6 +9,8 @@ import EditSpotForm from "../EditASpot";
 import CreateReviewForm from "../CreateReview";
 import ReviewPreview from "../ReviewPreview";
 import AirCover from "../../images/aircover.png"
+import { CheckInCalendarModal, CheckoutCalendarModal } from "../Calendar/Calendar";
+import { ReactCalendar } from "../Calendar";
 
 const GetOneSpot = () => {
     const { spotId } = useParams();
@@ -22,9 +24,17 @@ const GetOneSpot = () => {
     const thirtyDays = new Date(newDate).toLocaleDateString(undefined, options).split(",")[1];
 
     const [isLoaded, setIsLoaded] = useState(false);
+    const [checkInDate, setCheckInDate] = useState(new Date());
+    const [checkOutDate, setCheckOutDate] = useState(new Date(new Date().getTime() + (24 * 60 * 60 * 1000)));
 
     let spotImageArr;
     let spotImages = []
+
+    const state = useSelector((state) => {
+        return state
+    })
+
+    console.log("state", state, checkInDate, checkOutDate)
 
     const spotById = useSelector((state) => {
         return state?.spot?.oneSpot // {}
@@ -153,7 +163,7 @@ const GetOneSpot = () => {
         allowCreateReview = true;
     }
     reviewsArr.forEach(review => {
-        console.log("inforeach", review)
+        // console.log("inforeach", review)
         if (review?.userId === sessionUser?.id) {
             allowCreateReview = false;
         }
@@ -226,7 +236,6 @@ const GetOneSpot = () => {
                                         <img className="display-images top-right-image" src={spotImages[2]} />
                                     </div>
                                 </div>
-
                                 <div className="spot-images-container-right-middle-horizontal"></div>
 
                                 <div className="spot-images-container-right-bottom">
@@ -306,11 +315,7 @@ const GetOneSpot = () => {
                                     </div>
                                     <form className="booking-container-2">
                                         <div className="booking-container-2-box booking-container-2-top">
-                                            <div className="booking-container-2-box-content booking-container-2-box-content-50" style={{ fontSize: "12px", fontWeight: "500" }}>CHECK-IN</div>
-                                            <div className="booking-container-2-box-content booking-container-2-box-content-50" style={{ fontSize: "12px", fontWeight: "500", borderLeft: "1px solid lightgray" }}>CHECKOUT</div>
-                                        </div>
-                                        <div className="booking-container-2-box-2 booking-container-2-bottom">
-                                            <div className="booking-container-2-box-content" style={{ fontSize: "12px", fontWeight: "500" }}>GUESTS</div>
+                                            <ReactCalendar checkOutDate={checkOutDate} checkInDate={checkInDate} setCheckInDate={setCheckInDate} />
                                         </div>
                                         <button className="reserve-button" type="submit">Reserve</button>
                                         <div className="no-charge">You won't be charged yet.</div>

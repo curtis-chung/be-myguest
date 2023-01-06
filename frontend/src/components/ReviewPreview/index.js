@@ -9,7 +9,7 @@ const ReviewPreview = ({ review, spotId, sessionUser, created }) => {
     const history = useHistory();
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const date = `${new Date(created).toLocaleDateString(undefined, options).split(" ")[1] + " " + new Date(created).toLocaleDateString(undefined, options).split(" ")[3]}`;
-    console.log(date)
+    // console.log(date)
     // Delete review
     const handleDelete = async (e) => {
         e.preventDefault();
