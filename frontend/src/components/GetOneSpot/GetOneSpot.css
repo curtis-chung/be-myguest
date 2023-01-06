@@ -300,7 +300,7 @@
 
 .booking-container {
     width: 372px;
-    height: 496px;
+    height: 436px;
     padding: 24px 24px 0 24px;
     display: flex;
     flex-direction: column;
@@ -386,4 +386,8 @@
 
 .booking-container-2-box-content-50 {
     width: 50%;
+}
+
+.pricing-breakdown-titles {
+    text-decoration: underline;
 }

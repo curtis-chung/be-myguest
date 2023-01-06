@@ -49,20 +49,25 @@
 // // // .toJSON()
 // // // tileDisabled={({ date }) => date.getDate() === date1}
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker/dist/entry.nostyle';
 import "./Calendar.css"
 
-export function ReactCalendar({ checkInDate }) {
-    const [value, onChange] = useState([new Date(), new Date()]);
+export function ReactCalendar({ checkInOutDate, setCheckInOutDate }) {
+    // const [value, onChange] = useState([new Date().getTime() + (24 * 60 * 60 * 1000), new Date(new Date().getTime() + (24 * 60 * 60 * 1000) + (24 * 60 * 60 * 1000))]);
 
     const today = new Date()
-    console.log("checkInDate", checkInDate)
+    const checkInDate = new Date(new Date().getTime() + (24 * 60 * 60 * 1000))
+    // console.log("value", value)
+
+    // useEffect(() => {
+    //     setCheckInOutDate(value)
+    // })
 
     return (
         <DateRangePicker
-            onChange={onChange}
-            value={value}
+            onChange={setCheckInOutDate}
+            value={checkInOutDate}
             isOpen={false}
             calendarIcon={null}
             clearIcon={null}
@@ -77,7 +82,7 @@ export function ReactCalendar({ checkInDate }) {
             selectRange={true}
             showFixedNumberOfWeeks={false}
             showNeighboringMonth={false}
-            view={"months"}
+            view={"month"}
             rangeDivider={false}
             open={true}
             minDetail={"month"}

@@ -24,8 +24,9 @@ const GetOneSpot = () => {
     const thirtyDays = new Date(newDate).toLocaleDateString(undefined, options).split(",")[1];
 
     const [isLoaded, setIsLoaded] = useState(false);
-    const [checkInDate, setCheckInDate] = useState(new Date());
-    const [checkOutDate, setCheckOutDate] = useState(new Date(new Date().getTime() + (24 * 60 * 60 * 1000)));
+    const [checkInOutDate, setCheckInOutDate] = useState([new Date(new Date().getTime() + (24 * 60 * 60 * 1000)), new Date(new Date().getTime() + (24 * 60 * 60 * 1000) + (24 * 60 * 60 * 1000))]);
+
+    console.log("checkInOutDate", checkInOutDate)
 
     let spotImageArr;
     let spotImages = []
@@ -34,7 +35,7 @@ const GetOneSpot = () => {
         return state
     })
 
-    console.log("state", state, checkInDate, checkOutDate)
+    console.log("state", state)
 
     const spotById = useSelector((state) => {
         return state?.spot?.oneSpot // {}
@@ -315,14 +316,14 @@ const GetOneSpot = () => {
                                     </div>
                                     <form className="booking-container-2">
                                         <div className="booking-container-2-box booking-container-2-top">
-                                            <ReactCalendar checkOutDate={checkOutDate} checkInDate={checkInDate} setCheckInDate={setCheckInDate} />
+                                            <ReactCalendar setCheckInOutDate={setCheckInOutDate} checkInOutDate={checkInOutDate} />
                                         </div>
                                         <button className="reserve-button" type="submit">Reserve</button>
                                         <div className="no-charge">You won't be charged yet.</div>
                                     </form>
                                     <div className="booking-container-3">
                                         <div className="pricing-breakdown" style={{ display: "flex", alignItems: "center" }}>
-                                            <div>
+                                            <div className="pricing-breakdown-titles">
                                                 {spotById.price.toLocaleString('en-US', {
                                                     style: 'currency',
                                                     currency: 'USD',
@@ -340,7 +341,7 @@ const GetOneSpot = () => {
                                             </div>
                                         </div>
                                         <div className="pricing-breakdown" style={{ display: "flex", alignItems: "center" }}>
-                                            <div>
+                                            <div className="pricing-breakdown-titles">
                                                 Cleaning fee
                                             </div>
                                             <div>
@@ -353,7 +354,7 @@ const GetOneSpot = () => {
                                             </div>
                                         </div>
                                         <div className="pricing-breakdown" style={{ display: "flex", alignItems: "center", marginBottom: "25px" }}>
-                                            <div>
+                                            <div className="pricing-breakdown-titles">
                                                 Service fee
                                             </div>
                                             <div>
