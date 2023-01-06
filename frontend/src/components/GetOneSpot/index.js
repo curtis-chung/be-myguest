@@ -11,6 +11,7 @@ import ReviewPreview from "../ReviewPreview";
 import AirCover from "../../images/aircover.png"
 import { CheckInCalendarModal, CheckoutCalendarModal } from "../Calendar/Calendar";
 import { ReactCalendar } from "../Calendar";
+import * as bookingActions from "../../store/booking"
 
 const GetOneSpot = () => {
     const { spotId } = useParams();
@@ -25,8 +26,9 @@ const GetOneSpot = () => {
 
     const [isLoaded, setIsLoaded] = useState(false);
     const [checkInOutDate, setCheckInOutDate] = useState([new Date(new Date().getTime() + (24 * 60 * 60 * 1000)), new Date(new Date().getTime() + (24 * 60 * 60 * 1000) + (24 * 60 * 60 * 1000))]);
+    const [errors, setErrors] = useState({});
 
-    console.log("checkInOutDate", checkInOutDate)
+    // console.log("checkInOutDate", checkInOutDate)
 
     let spotImageArr;
     let spotImages = []
@@ -35,7 +37,7 @@ const GetOneSpot = () => {
         return state
     })
 
-    console.log("state", state)
+    // console.log("state", state)
 
     const spotById = useSelector((state) => {
         return state?.spot?.oneSpot // {}
@@ -112,6 +114,24 @@ const GetOneSpot = () => {
             .then(history.push(`/`))
     }
 
+    // Create booking
+    const handleReserve = async (e) => {
+        e.preventDefault();
+
+        const booking = {
+            startDate: checkInOutDate[0].toJSON().slice(0, 10),
+            endDate: checkInOutDate[1].toJSON().slice(0, 10),
+        }
+
+        console.log("booking", booking)
+
+        const createBooking = await dispatch(spotActions.createBooking(spotId, booking)).catch(async (res) => {
+            const data = await res.json();
+            // console.log(data)
+            if (data && data.errors) setErrors(data.message);
+        });
+    }
+
 
 
     // Checks
@@ -172,6 +192,7 @@ const GetOneSpot = () => {
 
     useEffect(() => {
         dispatch(spotActions.getOneSpot(spotId))
+        dispatch(bookingActions.getAllBookingsById(spotId))
         dispatch(reviewActions.getCurrentSpotReviews(spotId))
             .then(setExistingReviews(true))
             .then(setIsLoaded(true))
@@ -318,7 +339,10 @@ const GetOneSpot = () => {
                                         <div className="booking-container-2-box booking-container-2-top">
                                             <ReactCalendar setCheckInOutDate={setCheckInOutDate} checkInOutDate={checkInOutDate} />
                                         </div>
-                                        <button className="reserve-button" type="submit">Reserve</button>
+                                        {Object.values(errors).length > 0 && (
+                                            <div>{errors}</div>
+                                        )}
+                                        <button className="reserve-button" type="submit" onClick={handleReserve}>Reserve</button>
                                         <div className="no-charge">You won't be charged yet.</div>
                                     </form>
                                     <div className="booking-container-3">

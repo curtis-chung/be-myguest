@@ -121,6 +121,24 @@ export const deleteSpot = (spotId) => async (dispatch) => {
     return response
 }
 
+export const createBooking = (spotId, booking) => async (dispatch) => {
+
+    const response = await csrfFetch(`/api/spots/${spotId}/bookings`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(booking)
+    })
+
+    // When the booking is successfully created
+    if (response.ok) {
+        const newBooking = await response.json()
+        // dispatch(createSpotAction(newSpot))
+        return newBooking
+    }
+}
+
 // Initial state for store
 const initialState = {
     allSpot: {},

@@ -300,7 +300,7 @@
 
 .booking-container {
     width: 372px;
-    height: 436px;
+    min-height: 436px;
     padding: 24px 24px 0 24px;
     display: flex;
     flex-direction: column;
