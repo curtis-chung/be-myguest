@@ -1,54 +1,3 @@
-// import React, { useState } from 'react';
-// import { useDispatch, useSelector } from "react-redux";
-// import Calendar from 'react-calendar';
-// import 'react-calendar/dist/Calendar.css';
-
-// export function CheckInReactCalendar({ checkOutDate, checkInDate, setCheckInDate }) {
-//     // console.log("ABC", checkInDate, "BCD", setCheckInDate)
-//     // const [date, setDate] = useState(new Date());
-
-//     // const state = useSelector((state) => {
-//     //     return state
-//     // })
-
-//     // console.log("state1", state)
-
-//     // const onChange = async date => {
-//     //     setDate(date);
-//     // }
-
-//     return (
-//         <div>
-//             <Calendar onChange={setCheckInDate} value={checkInDate} tileDisabled={({ a, date, c }) => {
-//                 if (date.toJSON() <= today.toJSON()) return true
-//                 // console.log("AB", date.toJSON(), "CD", today.toJSON())
-//             }} />
-//         </div>
-//     );
-// }
-
-// export function CheckOutReactCalendar({ checkInDate, checkOutDate, setCheckOutDate }) {
-//     // const [date, setDate] = useState(new Date());
-
-//     // const state = useSelector((state) => {
-//     //     return state
-//     // })
-
-//     // console.log("state1", state)
-
-//     return (
-//         <div>
-//             <Calendar onChange={setCheckOutDate} value={checkOutDate} tileDisabled={({ a, date, c }) => {
-//                 if (date.toJSON() <= today.toJSON() || date.toJSON() <= checkInDate.toJSON()) return true
-//                 // console.log("AB", date.toJSON(), "CD", today.toJSON())
-//             }} />
-//         </div>
-//     );
-// }
-
-// // // .toJSON()
-// // // tileDisabled={({ date }) => date.getDate() === date1}
-
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -67,13 +16,19 @@ export function ReactCalendar({ checkInOutDate, setCheckInOutDate, setErrors }) 
         return state?.booking?.currSpotBookings
     })
 
+    const bookingsByUser = useSelector((state) => {
+        return state?.booking?.currUserBookings
+    })
+
     let dates = [];
 
     useEffect(() => {
-        dispatch(bookingActions.getAllBookingsById(spotId))
+        dispatch(bookingActions.getAllBookingsById(spotId));
+        dispatch(bookingActions.getAllUserBookings());
     }, [dispatch])
 
     useEffect(() => {
+        console.log("HMMM")
 
         Object.values(bookingsById).forEach((booking) => {
             function getDatesInRange(startDate, endDate) {
@@ -100,10 +55,36 @@ export function ReactCalendar({ checkInOutDate, setCheckInOutDate, setErrors }) 
                 })
             }
         })
-        console.log("dates", dates)
+
+        Object.values(bookingsByUser).forEach((booking) => {
+            function getDatesInRange(startDate, endDate) {
+                const date = new Date(startDate.getTime());
+
+                const dates = [];
+
+                while (date <= endDate) {
+                    dates.push(new Date(date));
+                    date.setDate(date.getDate() + 1);
+                }
+
+                return dates;
+            }
+
+            const d1 = new Date(`${booking["startDate"]}`);
+            const d2 = new Date(`${booking["endDate"]}`);
+
+            const allDatesArr = (getDatesInRange(d1, d2));
+
+            if (allDatesArr.length) {
+                allDatesArr.forEach((date) => {
+                    dates.push(date.toJSON().slice(0, 10))
+                })
+            }
+        })
+        // console.log("dates", dates)
     })
 
-    if (!Object.values(bookingsById).length) return null;
+    if (!Object.values(bookingsById).length || !Object.values(bookingsByUser).length) return null;
 
     return (
         <DateRangePicker
@@ -132,6 +113,7 @@ export function ReactCalendar({ checkInOutDate, setCheckInOutDate, setErrors }) 
             rangeDivider={false}
             open={true}
             minDetail={"month"}
+            allowPartialRange={true}
         />
     );
 }
