@@ -9,9 +9,10 @@ import EditSpotForm from "../EditASpot";
 import CreateReviewForm from "../CreateReview";
 import ReviewPreview from "../ReviewPreview";
 import AirCover from "../../images/aircover.png"
-import { CheckInCalendarModal, CheckoutCalendarModal } from "../Calendar/Calendar";
 import { ReactCalendar } from "../Calendar";
-import * as bookingActions from "../../store/booking"
+import * as bookingActions from "../../store/booking";
+import ConfirmBooking from "../Calendar/Calendar";
+
 
 const GetOneSpot = () => {
     const { spotId } = useParams();
@@ -25,8 +26,9 @@ const GetOneSpot = () => {
     const thirtyDays = new Date(newDate).toLocaleDateString(undefined, options).split(",")[1];
 
     const [isLoaded, setIsLoaded] = useState(false);
-    const [checkInOutDate, setCheckInOutDate] = useState([new Date(new Date().getTime() + (24 * 60 * 60 * 1000)), new Date(new Date().getTime() + (24 * 60 * 60 * 1000) + (24 * 60 * 60 * 1000))]);
+    const [checkInOutDate, setCheckInOutDate] = useState([new Date(new Date().getTime() + (24 * 60 * 60 * 1000)), new Date(new Date().getTime() + (24 * 60 * 60 * 1000) + (24 * 60 * 60 * 1000) + (24 * 60 * 60 * 1000))]);
     const [errors, setErrors] = useState({});
+    const [isValidBooking, setIsValidBooking] = useState(false);
 
     // console.log("checkInOutDate", checkInOutDate)
 
@@ -118,18 +120,27 @@ const GetOneSpot = () => {
     const handleReserve = async (e) => {
         e.preventDefault();
 
+        const newCheckOutDate = new Date(checkInOutDate[1])
+
         const booking = {
             startDate: checkInOutDate[0].toJSON().slice(0, 10),
-            endDate: checkInOutDate[1].toJSON().slice(0, 10),
+            endDate: new Date(newCheckOutDate.setDate(newCheckOutDate.getDate() - 1)).toJSON().slice(0, 10),
         }
 
-        console.log("booking", booking)
+        // console.log("booking", booking)
 
         const createBooking = await dispatch(spotActions.createBooking(spotId, booking)).catch(async (res) => {
             const data = await res.json();
-            // console.log(data)
+            console.log("data", data)
             if (data && data.errors) setErrors(data.message);
         });
+
+        if (createBooking) {
+            dispatch(bookingActions.getAllBookingsById(spotId))
+
+            setIsValidBooking(true)
+        }
+        // console.log("createBooking", createBooking)
     }
 
 
@@ -192,7 +203,6 @@ const GetOneSpot = () => {
 
     useEffect(() => {
         dispatch(spotActions.getOneSpot(spotId))
-        dispatch(bookingActions.getAllBookingsById(spotId))
         dispatch(reviewActions.getCurrentSpotReviews(spotId))
             .then(setExistingReviews(true))
             .then(setIsLoaded(true))
@@ -337,10 +347,10 @@ const GetOneSpot = () => {
                                     </div>
                                     <form className="booking-container-2">
                                         <div className="booking-container-2-box booking-container-2-top">
-                                            <ReactCalendar setCheckInOutDate={setCheckInOutDate} checkInOutDate={checkInOutDate} />
+                                            <ReactCalendar setCheckInOutDate={setCheckInOutDate} checkInOutDate={checkInOutDate} setErrors={setErrors} />
                                         </div>
                                         {Object.values(errors).length > 0 && (
-                                            <div>{errors}</div>
+                                            <div style={{ color: "red", fontSize: "12px", marginBottom: "16px" }}>{errors}</div>
                                         )}
                                         <button className="reserve-button" type="submit" onClick={handleReserve}>Reserve</button>
                                         <div className="no-charge">You won't be charged yet.</div>
@@ -438,6 +448,9 @@ const GetOneSpot = () => {
                         </div>
                     </div>
                 </div>
+            )}
+            {isValidBooking && (
+                <ConfirmBooking />
             )}
         </>
     )

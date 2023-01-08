@@ -1,0 +1,62 @@
+.booking-modal-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 350px;
+    height: 280px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.booking-modal-title {
+    /* border: 1px solid #ff385c; */
+    margin-top: 30px;
+    font-size: 32px;
+    height: 60px;
+}
+
+.booking-modal-body {
+    /* border: 1px solid #ff385c; */
+    height: 60px;
+    font-size: 14px;
+}
+
+.booking-modal-close {
+    margin-top: 20px;
+    border: 2px solid #37df30;
+    height: 40px;
+    border-radius: 10px;
+    font-weight: 600;
+    color: #37df30;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.booking-modal-close:hover {
+    background-color: white;
+}
+
+.booking-modal-div {
+    width: 80%;
+    /* border: 1px solid blue; */
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+}
+
+.booking-circle {
+    width: 90px;
+    height: 90px;
+    background-color: #37df30;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 48px;
+    font-weight: 700;
+    position: absolute;
+    margin-bottom: 280px;
+}
