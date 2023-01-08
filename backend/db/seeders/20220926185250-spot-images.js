@@ -120,22 +120,122 @@ module.exports = {
       {
         spotId: 5,
         url: "https://photos.zillowstatic.com/fp/89069735443aad91117413b8dc40435c-se_extra_large_1500_800.webp",
-        preview: true
+        preview: false
       },
       {
         spotId: 5,
         url: "https://photos.zillowstatic.com/fp/fe8efc1921dd3714730ad79bd7532e84-se_extra_large_1500_800.webp",
-        preview: true
+        preview: false
       },
       {
         spotId: 5,
         url: "https://photos.zillowstatic.com/fp/5d77ba30e5a9dfbe303dfa2765a80ae4-se_extra_large_1500_800.webp",
-        preview: true
+        preview: false
       },
       {
         spotId: 5,
         url: "https://photos.zillowstatic.com/fp/d38697dc6b1f1432b6edf192e1e0c0d5-se_large_800_400.webp",
+        preview: false
+      },
+      {
+        spotId: 6,
+        url: "https://photos.zillowstatic.com/fp/55b82407f06c7a729bddf0505998345c-cc_ft_1536.webp",
         preview: true
+      },
+      {
+        spotId: 6,
+        url: "https://photos.zillowstatic.com/fp/ddd1c53bec0160e237ff19b8451db848-cc_ft_384.webp",
+        preview: false
+      },
+      {
+        spotId: 6,
+        url: "https://photos.zillowstatic.com/fp/64619b6aebef4f4aa51b22e01b68c3ae-cc_ft_384.webp",
+        preview: false
+      },
+      {
+        spotId: 6,
+        url: "https://photos.zillowstatic.com/fp/67818f143f709b8c04c3a2e16eb856e0-cc_ft_384.webp",
+        preview: false
+      },
+      {
+        spotId: 6,
+        url: "https://photos.zillowstatic.com/fp/028792d85674c754c69b6a2cc6362eb0-cc_ft_384.webp",
+        preview: false
+      },
+      {
+        spotId: 7,
+        url: "https://photos.zillowstatic.com/fp/cf0aee8bf42f59663985b836d69b6243-cc_ft_1536.webp",
+        preview: true
+      },
+      {
+        spotId: 7,
+        url: "https://photos.zillowstatic.com/fp/fe93bdaa369cc50804edbb25101789c2-cc_ft_384.webp",
+        preview: false
+      },
+      {
+        spotId: 7,
+        url: "https://photos.zillowstatic.com/fp/b84ad1617cf8663946ed7eb2e389832e-cc_ft_384.webp",
+        preview: false
+      },
+      {
+        spotId: 7,
+        url: "https://photos.zillowstatic.com/fp/20376d1eb908a5e9cc16d62579666206-cc_ft_384.webp",
+        preview: false
+      },
+      {
+        spotId: 7,
+        url: "https://photos.zillowstatic.com/fp/a5dfcaec2119410b3c88a1f118643f24-cc_ft_384.webp",
+        preview: false
+      },
+      {
+        spotId: 8,
+        url: "https://photos.zillowstatic.com/fp/5a1cfa4e83f0c36fa4a5ad8887a707e6-cc_ft_1536.webp",
+        preview: true
+      },
+      {
+        spotId: 8,
+        url: "https://photos.zillowstatic.com/fp/e1f8bf2cb6b683ee9677f52ada68f580-cc_ft_384.webp",
+        preview: false
+      },
+      {
+        spotId: 8,
+        url: "https://photos.zillowstatic.com/fp/4caa82cf9abdcd7cbe967a26136e6ab7-cc_ft_384.webp",
+        preview: false
+      },
+      {
+        spotId: 8,
+        url: "https://photos.zillowstatic.com/fp/2846774a0e3df8d8e18e33128952a08b-cc_ft_384.webp",
+        preview: false
+      },
+      {
+        spotId: 8,
+        url: "https://photos.zillowstatic.com/fp/b81a93df734e22019a7e7be3ddc39da6-cc_ft_384.webp",
+        preview: false
+      },
+      {
+        spotId: 9,
+        url: "https://photos.zillowstatic.com/fp/98e094e12378d20a457b31a1fd082b6f-cc_ft_1536.webp",
+        preview: true
+      },
+      {
+        spotId: 9,
+        url: "https://photos.zillowstatic.com/fp/e30ede04eecf802996d00dff5990c6c7-cc_ft_384.webp",
+        preview: false
+      },
+      {
+        spotId: 9,
+        url: "https://photos.zillowstatic.com/fp/5225bd76d47c672921c64a6b427bc242-cc_ft_384.webp",
+        preview: false
+      },
+      {
+        spotId: 9,
+        url: "https://photos.zillowstatic.com/fp/98b839b910de329a9f3ae33bfb64146f-cc_ft_384.webp",
+        preview: false
+      },
+      {
+        spotId: 9,
+        url: "https://photos.zillowstatic.com/fp/7f609bfd1567614b48e191f11a39bcbb-cc_ft_384.webp",
+        preview: false
       },
     ])
   },

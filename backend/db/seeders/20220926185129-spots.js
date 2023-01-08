@@ -72,6 +72,54 @@ module.exports = {
         description: "Fifteen Hudson Yards occupies a prime position on the Public Square and Gardens at the center of Hudson Yards",
         price: 2995
       },
+      {
+        ownerId: 2,
+        address: "138 E 50th St",
+        city: "New York",
+        state: "New York",
+        country: "United States",
+        lat: 40.756171120247444,
+        lng: -73.97176462960047,
+        name: "The Centrale",
+        description: "Stunning with triple exposures facing North, East, and South, this 1,190 square foot corner one bedroom, one and half bathroom residence",
+        price: 2795
+      },
+      {
+        ownerId: 2,
+        address: "15 Hudson Yards",
+        city: "New York",
+        state: "New York",
+        country: "United States",
+        lat: 40.753752953511835,
+        lng: -74.0033048142566,
+        name: "Fifteen Hudson Yards",
+        description: "Prime southwest corner penthouse",
+        price: 12775
+      },
+      {
+        ownerId: 2,
+        address: "130 Furman St",
+        city: "Brooklyn",
+        state: "New York",
+        country: "United States",
+        lat: 40.70086872301576,
+        lng: -73.99630657192887,
+        name: "Condo in Brooklyn Heights",
+        description: "Enjoy townhouse-style living and 1,118 square feet of private outdoor space within the highly regarded Pierhouse at Brooklyn Bridge Park",
+        price: 7150
+      },
+      {
+        ownerId: 2,
+        address: "252 South St",
+        city: "New York",
+        state: "New York",
+        country: "United States",
+        lat: 40.71011146744696,
+        lng: -73.99127668356905,
+        name: "One Manhattan Square",
+        description: "Perfectly situated along the Lower East Side Waterfront, this 800-foot-tall striking glass tower that feature epic river and skyline views",
+        price: 2522
+      }
     ], {});
   },
 
