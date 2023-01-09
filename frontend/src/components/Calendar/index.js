@@ -28,7 +28,6 @@ export function ReactCalendar({ checkInOutDate, setCheckInOutDate, setErrors }) 
     }, [dispatch])
 
     useEffect(() => {
-        console.log("HMMM")
 
         Object.values(bookingsById).forEach((booking) => {
             function getDatesInRange(startDate, endDate) {
@@ -84,7 +83,7 @@ export function ReactCalendar({ checkInOutDate, setCheckInOutDate, setErrors }) 
         // console.log("dates", dates)
     })
 
-    if (!Object.values(bookingsById).length || !Object.values(bookingsByUser).length) return null;
+    // if (!Object.values(bookingsById).length || !Object.values(bookingsByUser).length) return null;
 
     return (
         <DateRangePicker
