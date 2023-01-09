@@ -521,8 +521,11 @@ router.post("/:spotId/bookings", [requireAuth, validateBooking], async (req, res
     if (spot.ownerId === userId) {
         res.status(403);
         return res.json({
-            message: "Forbidden",
-            statusCode: 403
+            message: "Sorry, you cannot book your own spots",
+            statusCode: 403,
+            errors: {
+                startDate: "Sorry, you cannot book your own spots",
+            }
         })
     }
 

@@ -3,7 +3,7 @@ import { Modal } from '../../context/Modal';
 import { useHistory, useParams } from "react-router-dom";
 import "./BookingModal.css"
 
-export default function ConfirmBooking() {
+export default function ConfirmBooking({ setIsValidBooking }) {
     const [showModal, setShowModal] = useState(true);
 
     return (
@@ -17,7 +17,7 @@ export default function ConfirmBooking() {
                             Your booking has been confirmed.
                         </div>
                         <div className='booking-modal-div booking-modal-close' onClick={() => {
-                            setShowModal(false)
+                            setShowModal(false); setIsValidBooking(false);
                         }}>
                             OK
                         </div>

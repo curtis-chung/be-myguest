@@ -450,7 +450,7 @@ const GetOneSpot = () => {
                 </div>
             )}
             {isValidBooking && (
-                <ConfirmBooking />
+                <ConfirmBooking setIsValidBooking={setIsValidBooking} />
             )}
         </>
     )
