@@ -12,6 +12,7 @@ import AirCover from "../../images/aircover.png"
 import { ReactCalendar } from "../Calendar";
 import * as bookingActions from "../../store/booking";
 import ConfirmBooking from "../Calendar/Calendar";
+import LoginForm from "../LoginFormModal/LoginForm";
 
 
 const GetOneSpot = () => {
@@ -97,6 +98,11 @@ const GetOneSpot = () => {
 
     const createReviewX = () => {
         setCreateReviewModal(false)
+    }
+    const [loginFormModal, setLoginFormModal] = useState(false);
+
+    const loginFormX = () => {
+        setLoginFormModal(false)
     }
 
     // # of reviews
@@ -352,7 +358,15 @@ const GetOneSpot = () => {
                                         {Object.values(errors).length > 0 && (
                                             <div style={{ color: "red", fontSize: "12px", marginBottom: "16px" }}>{errors}</div>
                                         )}
-                                        <button className="reserve-button" type="submit" onClick={handleReserve}>Reserve</button>
+                                        {isLoggedIn && (
+                                            <button className="reserve-button" type="submit" onClick={handleReserve}>Reserve</button>
+                                        )}
+                                        {!isLoggedIn && (
+                                            <button className="reserve-button" type="submit" onClick={(e) => {
+                                                e.preventDefault();
+                                                setLoginFormModal(true)
+                                            }}>Reserve</button>
+                                        )}
                                         <div className="no-charge">You won't be charged yet.</div>
                                     </form>
                                     <div className="booking-container-3">
@@ -452,6 +466,11 @@ const GetOneSpot = () => {
             {isValidBooking && (
                 <ConfirmBooking setIsValidBooking={setIsValidBooking} />
             )}
+            {loginFormModal &&
+                <Modal Modal onClose={() => setLoginFormModal(false)}>
+                    <LoginForm clickedX={loginFormX} />
+                </Modal>
+            }
         </>
     )
 }
