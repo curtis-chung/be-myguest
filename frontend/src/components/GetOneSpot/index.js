@@ -13,6 +13,7 @@ import { ReactCalendar } from "../Calendar";
 import * as bookingActions from "../../store/booking";
 import ConfirmBooking from "../Calendar/Calendar";
 import LoginForm from "../LoginFormModal/LoginForm";
+import SimpleMap from "../GoogleMaps";
 
 
 const GetOneSpot = () => {
@@ -459,6 +460,11 @@ const GetOneSpot = () => {
                                     <ReviewPreview key={review.id} review={review} spotId={spotId} sessionUser={sessionUser} created={review.updatedAt} />
                                 ))}
                             </div>
+                        </div>
+                        <div className="map-container">
+                            <div style={{ fontSize: "22px", fontWeight: "500", paddingTop: "16px", paddingBottom: "24px" }}>Where you'll be</div>
+                            <div style={{ fontSize: "16px", fontWeight: "400", paddingBottom: "24px" }}>{spotById?.city}, {spotById?.state}, {spotById?.country}</div>
+                            <SimpleMap lat={spotById.lat} lng={spotById.lng} name={spotById.name} />
                         </div>
                     </div>
                 </div>
