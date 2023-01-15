@@ -378,10 +378,10 @@ const GetOneSpot = () => {
                                                     currency: 'USD',
                                                     minimumFractionDigits: 0,
                                                     maximumFractionDigits: 0
-                                                })} x 2 nights
+                                                })} x {(Math.floor((Date.parse(checkInOutDate[1]) - Date.parse(checkInOutDate[0])) / 86400000))} nights
                                             </div>
                                             <div>
-                                                {(spotById.price * 2).toLocaleString('en-US', {
+                                                {(spotById.price * Math.floor((Date.parse(checkInOutDate[1]) - Date.parse(checkInOutDate[0])) / 86400000)).toLocaleString('en-US', {
                                                     style: 'currency',
                                                     currency: 'USD',
                                                     minimumFractionDigits: 0,
@@ -394,7 +394,7 @@ const GetOneSpot = () => {
                                                 Cleaning fee
                                             </div>
                                             <div>
-                                                {(spotById.price * 2 * .05).toLocaleString('en-US', {
+                                                {(spotById.price * Math.floor((Date.parse(checkInOutDate[1]) - Date.parse(checkInOutDate[0])) / 86400000) * .05).toLocaleString('en-US', {
                                                     style: 'currency',
                                                     currency: 'USD',
                                                     minimumFractionDigits: 0,
@@ -407,7 +407,7 @@ const GetOneSpot = () => {
                                                 Service fee
                                             </div>
                                             <div>
-                                                {(spotById.price * 2 * .03).toLocaleString('en-US', {
+                                                {(spotById.price * Math.floor((Date.parse(checkInOutDate[1]) - Date.parse(checkInOutDate[0])) / 86400000) * .03).toLocaleString('en-US', {
                                                     style: 'currency',
                                                     currency: 'USD',
                                                     minimumFractionDigits: 0,
@@ -421,7 +421,7 @@ const GetOneSpot = () => {
                                             Total before taxes
                                         </div>
                                         <div>
-                                            {(spotById.price * 2 + spotById.price * 2 * .05 + spotById.price * 2 * .03).toLocaleString('en-US', {
+                                            {(spotById.price * Math.floor((Date.parse(checkInOutDate[1]) - Date.parse(checkInOutDate[0])) / 86400000) + spotById.price * Math.floor((Date.parse(checkInOutDate[1]) - Date.parse(checkInOutDate[0])) / 86400000) * .05 + spotById.price * Math.floor((Date.parse(checkInOutDate[1]) - Date.parse(checkInOutDate[0])) / 86400000) * .03).toLocaleString('en-US', {
                                                 style: 'currency',
                                                 currency: 'USD',
                                                 minimumFractionDigits: 0,

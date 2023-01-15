@@ -7,6 +7,7 @@ import logo from "../../images/logo-placeholder.png"
 import CreateSpotForm from "../CreateSpot";
 import LoginForm from "../LoginFormModal/LoginForm";
 import { Modal } from '../../context/Modal';
+import SearchBar from "../SearchBar";
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
@@ -49,7 +50,9 @@ function Navigation({ isLoaded }) {
                     <div className="navbar-left-navlink-text">uest</div>
                 </NavLink>
             </div>
-
+            <div className="navbar-center">
+                <SearchBar />
+            </div>
             <div className='navbar-right'>
                 {/* {sessionUser && <div className='become-a-host-div'>
                     <button className="become-a-host-button">

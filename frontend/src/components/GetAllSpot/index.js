@@ -27,10 +27,12 @@ const GetAllSpot = () => {
     return (
         <>
             {spotsArr && (
-                <div className="get-all-spot-container">
-                    {spotsArr?.map((spot) => (
-                        <SpotCard key={spot.id} spot={spot} />
-                    ))}
+                <div className="get-all-spot-outter-container">
+                    <div className="get-all-spot-container">
+                        {spotsArr?.map((spot) => (
+                            <SpotCard key={spot.id} spot={spot} />
+                        ))}
+                    </div>
                 </div>
             )}
         </>

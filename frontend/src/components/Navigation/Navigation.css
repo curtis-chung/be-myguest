@@ -49,6 +49,10 @@
     display: flex;
 }
 
+.navbar-center {
+    width: 352px;
+}
+
 .navbar-right {
     border: none;
     display: flex;
